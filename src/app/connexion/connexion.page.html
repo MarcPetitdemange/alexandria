@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Alexandria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <ion-card>
+      <ion-item>
+        <ion-label>Login / Email </ion-label>
+        <ion-input type="email" clearInput></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" clearInput></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-button expand="block" (click)="connect()">Se connecter</ion-button>
+      <ion-router-link [href]="'/create-account'">Créer un compte</ion-router-link>
+    </ion-card>
+  </div>
+</ion-content>
