@@ -1,0 +1,39 @@
+.rounded{
+  --border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 0 1rem;
+
+  ion-icon{
+    font-size: 40pt;
+  }
+}
+
+
+ion-grid, ion-row{
+  width:100%;
+
+  ion-item{
+    width:50%;
+  }
+}
+
+.camera{
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0rem;
+}
+
+.error {
+  background-color: red;
+  color: black;
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}

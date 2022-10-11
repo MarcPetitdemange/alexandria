@@ -5,46 +5,69 @@
 </ion-header>
 
 <ion-content>
+
+
+
   <ion-card>
-    <ion-item>
-      <ion-label>Email </ion-label>
-      <ion-input type="email" [(ngModel)]="credentials.email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Login </ion-label>
-      <ion-input [(ngModel)]="credentials.login"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Lastname </ion-label>
-      <ion-input [(ngModel)]="credentials.lastname"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Firstname </ion-label>
-      <ion-input [(ngModel)]="credentials.firstname"></ion-input>
-    </ion-item>
 
 
-    <ion-item>
-      <ion-label>Password</ion-label>
-      <ion-input type="password" clearInput [(ngModel)]="credentials.password"></ion-input>
-    </ion-item>
 
 
-    <ion-item>
-      <ion-label>Confirm Password</ion-label>
-      <ion-input type="password" clearInput></ion-input>
-    </ion-item>
+    <ion-grid>
+      <ion-row class="camera">
+        <ion-button class="rounded" (click)="takePicture()">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">Lastname </ion-label>
+          <ion-input [(ngModel)]="credentials.lastname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Firstname </ion-label>
+          <ion-input [(ngModel)]="credentials.firstname"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">Phone </ion-label>
+          <ion-input type="tel" [(ngModel)]="credentials.phone"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">Email </ion-label>
+          <ion-input type="email" [(ngModel)]="credentials.email"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" clearInput [(ngModel)]="credentials.password"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input type="password" clearInput [(ngModel)]="credentials.confirmPassword"></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
   </ion-card>
 
   <ion-card>
-   <ion-button  expand="block" (click)="createAccount()">Confirmer</ion-button>
-   <ion-button  expand="block">Annuler</ion-button>
+   <ion-button expand="block" color="primary" (click)="createAccount()">Confirmer</ion-button>
+   <ion-button expand="block" color="secondary" (click)="cancel()">Annuler</ion-button>
+   <a [routerLink]="'/login'">I already have an account</a>
   </ion-card>
 
 
-  <ion-router-link href="/">Login</ion-router-link>
+
+  <div class="error" *ngIf="this.error !== null && this.error !== undefined">
+    <ion-icon [size]="'large'" name="warning-outline"></ion-icon>
+    <span>{{this.error}}</span>
+  </div>
 
 </ion-content>

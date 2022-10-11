@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,12 +9,20 @@ import { Router } from '@angular/router';
 })
 export class ConnexionPage implements OnInit {
 
-  constructor(private router: Router) { }
+  credentials: any = {
+    email : "",
+    password: "",
+  };
+
+  constructor(private router: Router, public ngFireAuth: AngularFireAuth) { }
 
   ngOnInit() {
   }
 
   connect(){
+    this.ngFireAuth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password).then(value => {
+      debugger;
+    });
     this.router.navigateByUrl('/tabs', { replaceUrl:true });
   }
 }
