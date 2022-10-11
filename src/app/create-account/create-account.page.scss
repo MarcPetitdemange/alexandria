@@ -9,12 +9,24 @@
   }
 }
 
+.align {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+ion-img::part(image){
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+}
+
 
 ion-grid, ion-row{
   width:100%;
 
   ion-item{
-    width:50%;
+    width:100%;
   }
 }
 

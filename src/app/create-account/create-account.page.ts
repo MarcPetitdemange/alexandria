@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Camera, CameraResultType } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-account',
@@ -12,19 +13,63 @@ export class CreateAccountPage implements OnInit {
   error: string;
   credentials: any = {};
 
-  constructor(public ngFireAuth: AngularFireAuth, private firestore: AngularFirestore) { }
+  constructor(public ngFireAuth: AngularFireAuth, private firestore: AngularFirestore, private actionSheetCtrl: ActionSheetController) { }
 
   ngOnInit() {
   }
 
-  takePicture() {
-    const takePicture = async () => {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Uri
-      });
-      const imageUrl = image.webPath;
+
+  async pictureChoice(){
+    const actionSheet = await this.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: 'Camera',
+          role: 'destructive',
+          handler: () => this.takePicture()
+        },
+        {
+          text: 'Gallery',
+          role: 'destructive',
+          handler: () => this.choosePictureFromGallery()
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ]
+    });
+
+    await actionSheet.present();
+    const result = await actionSheet.onDidDismiss();
+  }
+
+  async takePicture() {
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100
+    });
+
+    this.credentials.photo = {
+      filepath: "soon...",
+      webviewPath: capturedPhoto.webPath
+    };
+  }
+
+  cancelPicture(){
+    this.credentials.photo = null;
+  }
+
+  async choosePictureFromGallery(){
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos,
+      quality: 100
+    });
+
+    this.credentials.photo = {
+      filepath: "soon...",
+      webviewPath: capturedPhoto.webPath
     };
   }
 
