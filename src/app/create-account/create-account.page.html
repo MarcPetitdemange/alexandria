@@ -8,28 +8,28 @@
   <ion-card>
     <ion-item>
       <ion-label>Email </ion-label>
-      <ion-input type="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="credentials.email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Login </ion-label>
-      <ion-input></ion-input>
+      <ion-input [(ngModel)]="credentials.login"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Lastname </ion-label>
-      <ion-input></ion-input>
+      <ion-input [(ngModel)]="credentials.lastname"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Firstname </ion-label>
-      <ion-input></ion-input>
+      <ion-input [(ngModel)]="credentials.firstname"></ion-input>
     </ion-item>
 
 
     <ion-item>
       <ion-label>Password</ion-label>
-      <ion-input type="password" clearInput></ion-input>
+      <ion-input type="password" clearInput [(ngModel)]="credentials.password"></ion-input>
     </ion-item>
 
 
@@ -40,7 +40,7 @@
   </ion-card>
 
   <ion-card>
-   <ion-button  expand="block">Confirmer</ion-button>
+   <ion-button  expand="block" (click)="createAccount()">Confirmer</ion-button>
    <ion-button  expand="block">Annuler</ion-button>
   </ion-card>
 
