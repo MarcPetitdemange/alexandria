@@ -10,6 +10,20 @@ ion-card{
   height: 100%;
 }
 
+.error {
+  background-color: red;
+  color: black;
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+
 .wrapper > ion-card{
   width: 75vw;
 }

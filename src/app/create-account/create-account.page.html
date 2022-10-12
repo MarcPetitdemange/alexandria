@@ -11,29 +11,20 @@
   <ion-card>
     <ion-grid>
       <ion-row class="camera">
-        <ion-button class="rounded" (click)="pictureChoice()" *ngIf="credentials?.photo === null || credentials?.photo === undefined">
+        <ion-button class="rounded" (click)="takePicture()">
           <ion-icon name="camera-outline"></ion-icon>
         </ion-button>
-        <div class="align" *ngIf="credentials?.photo !== null && credentials?.photo !== undefined">
-          <ion-img class="rounded" [src]="credentials?.photo?.webviewPath"></ion-img>
-          <ion-button size="large" (click)="cancelPicture()" color="danger">
-            <ion-icon slot="icon-only" name="trash" ></ion-icon>
-          </ion-button>
-        </div>
       </ion-row>
       <ion-row>
-        <ion-col>
-          <ion-item class="splitted">
-            <ion-label position="floating">Lastname </ion-label>
-            <ion-input [(ngModel)]="credentials.lastname"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Firstname </ion-label>
-            <ion-input [(ngModel)]="credentials.firstname"></ion-input>
-          </ion-item>
-        </ion-col>
+        <ion-item>
+          <ion-label position="floating">Lastname </ion-label>
+          <ion-input [(ngModel)]="credentials.lastname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Firstname </ion-label>
+          <ion-input [(ngModel)]="credentials.firstname"></ion-input>
+        </ion-item>
       </ion-row>
       <ion-row>
         <ion-item>

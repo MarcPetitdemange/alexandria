@@ -9,12 +9,12 @@
     <ion-card>
       <ion-item>
         <ion-label>Login / Email </ion-label>
-        <ion-input type="email" clearInput [ngModel]="credentials.email"></ion-input>
+        <ion-input type="email" clearInput [(ngModel)]="credentials.email"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input type="password" clearInput [ngModel]="credentials.password"></ion-input>
+        <ion-input type="password" clearInput [(ngModel)]="credentials.password"></ion-input>
       </ion-item>
     </ion-card>
 
@@ -22,5 +22,10 @@
       <ion-button expand="block" (click)="connect()">Se connecter</ion-button>
       <a [routerLink]="'/create-account'">Create Account</a>
     </ion-card>
+
+    <div class="error" *ngIf="this.error !== null && this.error !== undefined">
+      <ion-icon [size]="'large'" name="warning-outline"></ion-icon>
+      <span>{{this.error}}</span>
+    </div>
   </div>
 </ion-content>
