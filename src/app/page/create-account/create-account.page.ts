@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 
@@ -13,7 +14,7 @@ export class CreateAccountPage implements OnInit {
   error: string;
   credentials: any = {};
 
-  constructor(public ngFireAuth: AngularFireAuth, private firestore: AngularFirestore, private actionSheetCtrl: ActionSheetController) { }
+  constructor(public ngFireAuth: AngularFireAuth, private firestorage: AngularFireStorage, private firestore: AngularFirestore, private actionSheetCtrl: ActionSheetController) { }
 
   ngOnInit() {
   }
@@ -54,6 +55,9 @@ export class CreateAccountPage implements OnInit {
       filepath: "soon...",
       webviewPath: capturedPhoto.webPath
     };
+
+    //const data = this.credentials.pgoto.webviewPath;
+    //this.firestorage.upload('/userPictures/test',new Blob([data]));
   }
 
   cancelPicture(){
@@ -102,6 +106,9 @@ export class CreateAccountPage implements OnInit {
       lastname: user.lastname,
       phone: user.phone
     };
+
+
+
     return userRef.set(userData, {
       merge: true,
     });

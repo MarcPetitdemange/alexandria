@@ -14,15 +14,15 @@ export class LibraryService {
 
 
   getAllLibrary() {
-    return this.firestore.collection('livres').get();
+    return this.firestore.collection('books').get();
   }
 
   deleteBookById(id: string) {
-    this.bookRef = this.db.object('/livres/' + id);
+    this.bookRef = this.db.object('/books/' + id);
     this.bookRef.remove();
   }
 
   addBook(book: any){
-    this.firestore.collection('livres').add(book);
+    this.firestore.collection('books').add(book);
   }
 }

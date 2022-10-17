@@ -21,6 +21,7 @@ export class ConnexionPage implements OnInit {
   connect(){
     this.ngFireAuth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password).then(value => {
       this.valid = true;
+      this.error = null;
       setTimeout(() => this.router.navigateByUrl('/tabs', { replaceUrl:true }), 1000);
     }).catch(error => {
       this.error = error;

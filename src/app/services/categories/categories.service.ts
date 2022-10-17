@@ -14,7 +14,7 @@ export class CategoriesService {
 
 
   getAllCategories() {
-    return this.firestore.collection('categories').snapshotChanges();
+    return this.firestore.collection('categories').get();
   }
 
   deleteCategoryById(id: string) {

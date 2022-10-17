@@ -16,7 +16,7 @@
 
   <ion-card *ngFor="let book of this.allBooks">
     <ion-card-header >
-      <ion-card-title>{{book.titre}}</ion-card-title>
+      <ion-card-title>{{book.title}}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -25,7 +25,7 @@
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary" title="Scan a book" style="margin-bottom: 1rem;">
+    <ion-fab-button color="secondary" title="Scan a book" style="margin-bottom: 1rem;" (click)="scanBook()">
       <ion-icon name="scan-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-button color="primary" title="Add a book" (click)="addBook()">
