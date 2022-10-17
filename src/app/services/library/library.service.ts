@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/compat/database';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import * as firebase from 'firebase/compat';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
 
-  bookingListRef: AngularFireList<any>;
-  bookingRef: AngularFireObject<any>;
+  bookRef: AngularFireObject<any>;
 
   constructor(
     private db: AngularFireDatabase, private firestore: AngularFirestore) { }
 
 
   getAllLibrary() {
-    return this.firestore.collection('livres').snapshotChanges();
+    return this.firestore.collection('livres').get();
   }
 
   deleteBookById(id: string) {
-    this.bookingRef = this.db.object('/livres/' + id);
-    this.bookingRef.remove();
+    this.bookRef = this.db.object('/livres/' + id);
+    this.bookRef.remove();
   }
 
   addBook(book: any){

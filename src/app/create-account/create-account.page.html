@@ -11,9 +11,15 @@
   <ion-card>
     <ion-grid>
       <ion-row class="camera">
-        <ion-button class="rounded" (click)="takePicture()">
+        <ion-button class="rounded" (click)="pictureChoice()">
           <ion-icon name="camera-outline"></ion-icon>
         </ion-button>
+        <div class="align" *ngIf="credentials?.photo !== null && credentials?.photo !== undefined">
+          <ion-img class="rounded" [src]="credentials?.photo?.webviewPath"></ion-img>
+          <ion-button size="large" (click)="cancelPicture()" color="danger">
+            <ion-icon slot="icon-only" name="trash" ></ion-icon>
+          </ion-button>
+        </div>
       </ion-row>
       <ion-row>
         <ion-item>
@@ -54,8 +60,8 @@
   </ion-card>
 
   <ion-card>
-   <ion-button expand="block" color="primary" (click)="createAccount()">Confirmer</ion-button>
-   <ion-button expand="block" color="secondary" (click)="cancel()">Annuler</ion-button>
+   <ion-button expand="block" color="primary" (click)="createAccount()">Confirm</ion-button>
+   <ion-button expand="block" color="secondary" (click)="cancel()">Cancel</ion-button>
    <a [routerLink]="'/login'">I already have an account</a>
   </ion-card>
 

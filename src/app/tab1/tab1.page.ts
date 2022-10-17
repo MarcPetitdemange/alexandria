@@ -8,12 +8,16 @@ import { LibraryService } from '../services/library/library.service';
 })
 export class Tab1Page implements OnInit {
 
+  allBooks: any[];
+
   constructor(
     private libraryService: LibraryService
   ) {}
 
   ngOnInit(): void {
     this.libraryService.getAllLibrary().subscribe((value) => {
+      this.allBooks = value.docs.map(doc => doc.data());
+      debugger;
     });
   }
 

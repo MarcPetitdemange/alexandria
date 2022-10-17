@@ -24,6 +24,20 @@ ion-card{
   border-radius: 0.5rem;
 }
 
+.valid {
+  padding: 2rem;
+  display: flex;
+  background-color: green;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  font-size: 60pt;
+}
+
 .wrapper > ion-card{
   width: 75vw;
 }

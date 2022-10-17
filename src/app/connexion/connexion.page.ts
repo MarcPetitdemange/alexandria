@@ -11,6 +11,7 @@ export class ConnexionPage implements OnInit {
 
   credentials: any = {};
   error: any;
+  valid = false;
 
   constructor(private router: Router, public ngFireAuth: AngularFireAuth) { }
 
@@ -19,9 +20,11 @@ export class ConnexionPage implements OnInit {
 
   connect(){
     this.ngFireAuth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password).then(value => {
-      this.router.navigateByUrl('/tabs', { replaceUrl:true });
+      this.valid = true;
+      setTimeout(() => this.router.navigateByUrl('/tabs', { replaceUrl:true }), 1000);
     }).catch(error => {
       this.error = error;
+      this.valid = false;
     });
   }
 }

@@ -13,14 +13,22 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-  <ion-button (click)="addBook()">Ajouter un livre</ion-button>
+
+  <ion-card *ngFor="let book of this.allBooks">
+    <ion-card-header >
+      <ion-card-title>{{book.titre}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{book.description}}
+    </ion-card-content>
+  </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="secondary" title="Scan a book" style="margin-bottom: 1rem;">
       <ion-icon name="scan-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button color="primary" title="Add a book">
+    <ion-fab-button color="primary" title="Add a book" (click)="addBook()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

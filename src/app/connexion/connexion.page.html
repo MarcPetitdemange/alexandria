@@ -19,13 +19,16 @@
     </ion-card>
 
     <ion-card>
-      <ion-button expand="block" (click)="connect()">Se connecter</ion-button>
+      <ion-button expand="block" (click)="connect()">Connect</ion-button>
       <a [routerLink]="'/create-account'">Create Account</a>
     </ion-card>
 
     <div class="error" *ngIf="this.error !== null && this.error !== undefined">
       <ion-icon [size]="'large'" name="warning-outline"></ion-icon>
       <span>{{this.error}}</span>
+    </div>
+    <div class="valid" *ngIf="this.valid">
+      <ion-icon [size]="'200px'" name="checkmark-circle-outline"></ion-icon>
     </div>
   </div>
 </ion-content>

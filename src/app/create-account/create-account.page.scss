@@ -33,6 +33,8 @@ ion-grid, ion-row{
 .camera{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-content: center;
   padding: 2rem 0rem;
 }
 
