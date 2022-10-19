@@ -7,8 +7,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class LibraryService {
 
-  bookRef: AngularFireObject<any>;
-
   constructor(
     private db: AngularFireDatabase, private firestore: AngularFirestore) { }
 
@@ -18,8 +16,8 @@ export class LibraryService {
   }
 
   deleteBookById(id: string) {
-    this.bookRef = this.db.object('/books/' + id);
-    this.bookRef.remove();
+    const bookRef = this.firestore.doc('/books/' + id);
+    bookRef.delete();
   }
 
   addBook(book: any){
