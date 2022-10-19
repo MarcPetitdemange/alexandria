@@ -1,5 +1,6 @@
 import { CategoriesService } from './../../../services/categories/categories.service';
 import { Component, OnInit } from '@angular/core';
+import { MapUtils } from 'src/app/model/MapUtils';
 
 @Component({
   selector: 'app-categories',
@@ -13,16 +14,25 @@ export class CategoriesPage implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
+    this.refreshCategoriesList();
+  }
+
+  refreshCategoriesList(){
     this.categoriesService.getAllCategories().subscribe((value) => {
-      this.allCategories = value.docs.map(doc => doc.data());
+      this.allCategories = MapUtils.mapBook(value);
     });
   }
 
-  addBook(): void {
+  addCategorie(): void {
     this.categoriesService.addCategory({
       title: "Test",
       description: "Test description"
     });
+  }
+
+  deleteCategorie(uid: string) {
+    this.categoriesService.deleteCategoryById(uid);
+    this.refreshCategoriesList();
   }
 
 }

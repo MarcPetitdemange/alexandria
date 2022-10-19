@@ -7,10 +7,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class CategoriesService {
 
-  categorieRef: AngularFireObject<any>;
 
   constructor(
-    private db: AngularFireDatabase, private firestore: AngularFirestore) { }
+    private firestore: AngularFirestore) { }
 
 
   getAllCategories() {
@@ -18,8 +17,8 @@ export class CategoriesService {
   }
 
   deleteCategoryById(id: string) {
-    this.categorieRef = this.db.object('/categories/' + id);
-    this.categorieRef.remove();
+    const categorieRef = this.firestore.doc('/categories/' + id);
+    categorieRef.delete();
   }
 
   addCategory(book: any){

@@ -13,10 +13,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card *ngFor="let book of this.allCategories">
+  <ion-card *ngFor="let categorie of this.allCategories">
     <ion-card-header >
-      <ion-card-title>{{book.title}}</ion-card-title>
+      <ion-card-title>{{categorie.title}}</ion-card-title>
     </ion-card-header>
+    <ion-button (click)="deleteCategorie(categorie.id)">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button>
   </ion-card>
 
 </ion-content>

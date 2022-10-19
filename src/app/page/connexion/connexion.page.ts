@@ -1,3 +1,4 @@
+import { AccountService } from './../../services/account/account.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -13,19 +14,14 @@ export class ConnexionPage implements OnInit {
   error: any;
   valid = false;
 
-  constructor(private router: Router, public ngFireAuth: AngularFireAuth) { }
+  constructor(public ngFireAuth: AngularFireAuth, private accountService:AccountService) { }
 
   ngOnInit() {
   }
 
   connect(){
-    this.ngFireAuth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password).then(value => {
-      this.valid = true;
-      this.error = null;
-      setTimeout(() => this.router.navigateByUrl('/tabs', { replaceUrl:true }), 1000);
-    }).catch(error => {
-      this.error = error;
-      this.valid = false;
-    });
+    this.accountService.connect(this.credentials,this.error,this.valid);
   }
+
+
 }

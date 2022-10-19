@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LibraryService } from '../../../services/library/library.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { MapUtils } from 'src/app/model/MapUtils';
 
 @Component({
   selector: 'app-library',
@@ -9,15 +10,19 @@ import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 })
 export class LibraryPage implements OnInit {
 
-  allBooks: any[];
+  allBooks: any[] = [];
 
   constructor(
     private libraryService: LibraryService
   ) {}
 
   ngOnInit(): void {
+   this.refreshBookList();
+  }
+
+  refreshBookList(){
     this.libraryService.getAllLibrary().subscribe((value) => {
-      this.allBooks = value.docs.map(doc => doc.data());
+      this.allBooks = MapUtils.mapBook(value);
     });
   }
 
@@ -26,6 +31,12 @@ export class LibraryPage implements OnInit {
       titre: "Test",
       description: "Test description"
     });
+    this.refreshBookList();
+  }
+
+  deleteBook(uid: string): void {
+    this.libraryService.deleteBookById(uid);
+    this.refreshBookList();
   }
 
   async scanBook() {
