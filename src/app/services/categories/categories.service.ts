@@ -22,6 +22,6 @@ export class CategoriesService {
   }
 
   addCategory(book: any){
-    this.firestore.collection('categories').add(book);
+    return this.firestore.collection('categories').add(book);
   }
 }

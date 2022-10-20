@@ -27,11 +27,14 @@
     </ion-card-content>
   </ion-card>
 
+
+  <app-add-book #modalBook (refresh)="refreshBookList()"></app-add-book>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="secondary" title="Scan a book" style="margin-bottom: 1rem;" (click)="scanBook()">
       <ion-icon name="scan-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button color="primary" title="Add a book" (click)="addBook()">
+    <ion-fab-button id="open-modal-book" color="primary" title="Add a book">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

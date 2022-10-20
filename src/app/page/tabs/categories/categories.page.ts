@@ -1,6 +1,9 @@
 import { CategoriesService } from './../../../services/categories/categories.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapUtils } from 'src/app/model/MapUtils';
+import { AlertController } from '@ionic/angular';
+import { AddCategorieComponent } from 'src/app/component/add-categorie/add-categorie.component';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
@@ -9,9 +12,11 @@ import { MapUtils } from 'src/app/model/MapUtils';
 })
 export class CategoriesPage implements OnInit {
 
+  @ViewChild(AddCategorieComponent) modalCategory: AddCategorieComponent;
+
   allCategories: any[];
 
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(private categoriesService: CategoriesService, private alertController: AlertController) {}
 
   ngOnInit(): void {
     this.refreshCategoriesList();
@@ -23,16 +28,33 @@ export class CategoriesPage implements OnInit {
     });
   }
 
-  addCategorie(): void {
-    this.categoriesService.addCategory({
-      title: "Test",
-      description: "Test description"
+  editCategory(category: any){
+    this.modalCategory.toggleOpen();
+    this.modalCategory.category = new FormGroup({
+      title: new FormControl(category.title),
+      description: new FormControl(category.description),
     });
   }
 
-  deleteCategorie(uid: string) {
-    this.categoriesService.deleteCategoryById(uid);
-    this.refreshCategoriesList();
+  async deleteCategorie(uid: string) {
+    const alert = await this.alertController.create({
+      header: 'Warning !',
+      message: 'You\'re going to delete this category.<br> Do you want to continue ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.categoriesService.deleteCategoryById(uid);
+            this.refreshCategoriesList();
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
-
 }

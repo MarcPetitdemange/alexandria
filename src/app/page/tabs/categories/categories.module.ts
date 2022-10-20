@@ -1,7 +1,8 @@
+import { AddCategorieComponent } from './../../../component/add-categorie/add-categorie.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriesPage } from './categories.page';
 import { CategoriesRoutingModule } from './categories-routing';
 
@@ -10,8 +11,9 @@ import { CategoriesRoutingModule } from './categories-routing';
     IonicModule,
     CommonModule,
     FormsModule,
-    CategoriesRoutingModule
+    CategoriesRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [CategoriesPage]
+  declarations: [CategoriesPage, AddCategorieComponent]
 })
 export class CategoriesPageModule {}

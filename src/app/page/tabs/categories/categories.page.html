@@ -17,9 +17,27 @@
     <ion-card-header >
       <ion-card-title>{{categorie.title}}</ion-card-title>
     </ion-card-header>
-    <ion-button (click)="deleteCategorie(categorie.id)">
-      <ion-icon name="trash"></ion-icon>
-    </ion-button>
+
+    <ion-card-content>
+      {{categorie.description}}
+
+      <div class="align-right">
+        <ion-button (click)="editCategory(categorie)" shape="round">
+          <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteCategorie(categorie.id)" shape="round" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
   </ion-card>
+
+  <app-add-categorie #modalCategory (refresh)="refreshCategoriesList()"></app-add-categorie>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  id="open-modal-category" expand="block" color="primary" title="Add a category">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

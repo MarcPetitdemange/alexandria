@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AddBookComponent } from './../../../component/add-book/add-book.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LibraryService } from '../../../services/library/library.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { MapUtils } from 'src/app/model/MapUtils';
@@ -9,6 +10,8 @@ import { MapUtils } from 'src/app/model/MapUtils';
   styleUrls: ['library.page.scss']
 })
 export class LibraryPage implements OnInit {
+
+  @ViewChild(AddBookComponent) modalBook: AddBookComponent;
 
   allBooks: any[] = [];
 
@@ -26,21 +29,12 @@ export class LibraryPage implements OnInit {
     });
   }
 
-  addBook(): void {
-    this.libraryService.addBook({
-      titre: "Test",
-      description: "Test description"
-    });
-    this.refreshBookList();
-  }
-
   deleteBook(uid: string): void {
     this.libraryService.deleteBookById(uid);
     this.refreshBookList();
   }
 
   async scanBook() {
-    alert("test");
     document.querySelector('body').classList.add('scanner-active');
     BarcodeScanner.hideBackground();
 

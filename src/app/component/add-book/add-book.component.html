@@ -1,0 +1,44 @@
+<ion-modal #modal trigger="open-modal-book" [isOpen]="isOpen" (didDismiss)="isOpen = false" (didPresent)="refreshListCategories()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Add a book</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cancel()" [strong]="true">
+            <ion-icon slot="start" name="close-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="book" (ngSubmit)="submit()">
+        <ion-item counter="true">
+          <ion-label position="floating">Title</ion-label>
+          <ion-input formControlName="title" type="text" maxlength="20"></ion-input>
+        </ion-item>
+        <ion-item counter="true">
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea formControlName="description" type="text" [autoGrow]="true" maxlength="300"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Categories</ion-label>
+          <ion-select [multiple]="true">
+            <ion-select-option *ngFor="let category of listCategories" value="category.id">{{category.title}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button class="rounded" (click)="pictureChoice()">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>
+        <div class="bottom-menu">
+          <ion-button shape="round" color="secondary" (click)="cancel()">
+            <ion-icon slot="start" name="close-circle"></ion-icon>Cancel
+          </ion-button>
+          <ion-button shape="round" color="primary" type="submit">
+            <ion-icon slot="start" name="checkmark"></ion-icon>
+            Confirm
+          </ion-button>
+        </div>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

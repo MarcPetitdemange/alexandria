@@ -1,20 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Alexandria</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <div class="wrapper">
     <ion-card>
       <ion-item>
         <ion-label>Login / Email </ion-label>
-        <ion-input type="email" clearInput [(ngModel)]="credentials.email"></ion-input>
+        <ion-input type="email" clearInput [(ngModel)]="credentials.email" (keyup.enter)="connect()"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input type="password" clearInput [(ngModel)]="credentials.password"></ion-input>
+        <ion-input type="password" clearInput [(ngModel)]="credentials.password" (keyup.enter)="connect()"></ion-input>
       </ion-item>
     </ion-card>
 

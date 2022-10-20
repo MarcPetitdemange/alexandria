@@ -1,0 +1,10 @@
+.align-right{
+  display: flex;
+  justify-content: right;
+}
+
+.align-right > ion-button{
+  width: 56px;
+  height: 56px;
+  margin: 0.5rem;
+}

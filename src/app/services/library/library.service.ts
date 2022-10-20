@@ -21,6 +21,6 @@ export class LibraryService {
   }
 
   addBook(book: any){
-    this.firestore.collection('books').add(book);
+    return this.firestore.collection('books').add(book);
   }
 }

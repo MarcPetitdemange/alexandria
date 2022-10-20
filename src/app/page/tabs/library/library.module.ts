@@ -1,7 +1,8 @@
+import { AddBookComponent } from './../../../component/add-book/add-book.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LibraryPage } from './library.page';
 import { ExploreContainerComponentModule } from '../../../explore-container/explore-container.module';
 
@@ -13,8 +14,9 @@ import { LibraryRoutingModule } from './library-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    LibraryRoutingModule
+    LibraryRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [LibraryPage]
+  declarations: [LibraryPage, AddBookComponent]
 })
 export class LibraryPageModule {}
