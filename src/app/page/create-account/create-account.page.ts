@@ -55,9 +55,6 @@ export class CreateAccountPage implements OnInit {
       filepath: "soon...",
       webviewPath: capturedPhoto.webPath
     };
-
-    //const data = this.credentials.pgoto.webviewPath;
-    //this.firestorage.upload('/userPictures/test',new Blob([data]));
   }
 
   cancelPicture(){
@@ -96,18 +93,23 @@ export class CreateAccountPage implements OnInit {
   }
 
 
-  setUserData(user) {
+  async setUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
       `users/${user.uid}`
     );
+
+
+    const response = await fetch(this.credentials.photo.webviewPath);
+    const blob = await response.blob();
+    this.firestorage.upload('/userPictures/' + user.uid, blob);
+
     const userData: any = {
       uid: user.uid,
       firstname: user.firstname,
       lastname: user.lastname,
-      phone: user.phone
+      phone: user.phone,
+      photo: '/userPictures/' + user.uid
     };
-
-
 
     return userRef.set(userData, {
       merge: true,
