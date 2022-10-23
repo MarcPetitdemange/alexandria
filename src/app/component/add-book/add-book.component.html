@@ -22,8 +22,8 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Categories</ion-label>
-          <ion-select [multiple]="true">
-            <ion-select-option *ngFor="let category of listCategories" value="category.id">{{category.title}}</ion-select-option>
+          <ion-select formControlName="categories" [multiple]="true" value="">
+            <ion-select-option *ngFor="let category of listCategories" [value]="category.id">{{category.title}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-button class="rounded" (click)="pictureChoice()">

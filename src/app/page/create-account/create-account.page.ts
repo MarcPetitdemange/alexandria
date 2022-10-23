@@ -99,9 +99,11 @@ export class CreateAccountPage implements OnInit {
     );
 
 
-    const response = await fetch(this.credentials.photo.webviewPath);
-    const blob = await response.blob();
-    this.firestorage.upload('/userPictures/' + user.uid, blob);
+    if(this.credentials.photo != null && this.credentials.photo.webviewPath != null){
+      const response = await fetch(this.credentials.photo.webviewPath);
+      const blob = await response.blob();
+      this.firestorage.upload('/userPictures/' + user.uid, blob);
+    }
 
     const userData: any = {
       uid: user.uid,

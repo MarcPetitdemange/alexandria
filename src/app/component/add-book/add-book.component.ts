@@ -28,6 +28,7 @@ export class AddBookComponent implements OnInit {
     this.book = new FormGroup({
       title: new FormControl(''),
       description: new FormControl(''),
+      categories: new FormControl([])
     });
   }
 

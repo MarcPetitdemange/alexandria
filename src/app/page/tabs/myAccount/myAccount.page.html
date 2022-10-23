@@ -7,6 +7,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+
+  {{this.accountService?.loggedUser.email}}
+
+
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-button color="danger" (click)="disconnect()">

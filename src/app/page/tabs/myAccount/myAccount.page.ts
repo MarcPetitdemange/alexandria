@@ -10,11 +10,12 @@ import { Router } from '@angular/router';
 })
 export class MyAccountPage implements OnInit {
 
-  constructor(private router: Router, private ngFireAuth: AngularFireAuth, private accountService: AccountService) {}
+  constructor(private router: Router, private ngFireAuth: AngularFireAuth, public accountService: AccountService) {}
 
 
   ngOnInit(): void {
     this.accountService.getCurrentUserInformations();
+    console.log(this.accountService?.loggedUser.email);
   }
 
   disconnect(){

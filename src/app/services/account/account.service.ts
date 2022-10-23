@@ -10,25 +10,51 @@ import { browserSessionPersistence, setPersistence } from 'firebase/auth';
 })
 export class AccountService {
 
+  loggedUser: any;
+
   constructor(public ngFireAuth: AngularFireAuth,  private db: AngularFireDatabase, private firestore: AngularFirestore, private router: Router) { }
 
   async getCurrentUserInformations(){
-    return this.ngFireAuth.currentUser.then(user => {
-      debugger;
-      this.db.object('/users/' + user.uid);
-    });
+    this.loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));
+    debugger;
+    return this.loggedUser;
   }
 
-  connect(credentials,error,valid){
-    this.ngFireAuth.setPersistence('session').then(() => {
-      this.ngFireAuth.signInWithEmailAndPassword(credentials.email, credentials.password).then(value => {
-        valid = true;
-        error = null;
-        setTimeout(() => this.router.navigateByUrl('/tabs', { replaceUrl:true }), 1000);
-      }).catch(error => {
-        error = error;
-        valid = false;
-      });
-    });
+  async connect(credentials,error,valid){
+
+    try{
+      const userData = await this.ngFireAuth.signInWithEmailAndPassword(credentials.email, credentials.password);
+      this.loggedUser = userData.user;
+      sessionStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
+      setTimeout(() => this.router.navigateByUrl('/tabs', { replaceUrl:true }), 1000);
+      return {
+        valid: true,
+        error: null,
+      };
+    } catch (e){
+      return {
+        valid: false,
+        error: e,
+      };
+    }
+
+  //   .then(value => {
+  //     this.loggedUser = value.user;
+  //     sessionStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
+  //     valid = true;
+  //     error = null;
+  //     return {
+  //       valid: true,
+  //       error: null,
+  //     };
+  //   }).catch(error => {
+  //     error = error;
+  //     valid = false;
+  //     return {
+  //       valid: false,
+  //       error,
+  //     };
+  //   });
+  // }
   }
 }

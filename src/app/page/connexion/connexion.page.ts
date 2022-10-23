@@ -14,13 +14,18 @@ export class ConnexionPage implements OnInit {
   error: any;
   valid = false;
 
-  constructor(public ngFireAuth: AngularFireAuth, private accountService:AccountService) { }
+  constructor(public ngFireAuth: AngularFireAuth, private accountService:AccountService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  connect(){
-    this.accountService.connect(this.credentials,this.error,this.valid);
+  async connect(){
+    const statut: any = await this.accountService.connect(this.credentials,this.error,this.valid);
+    debugger;
+    this.error = statut.error;
+    this.valid = statut.valid;
+
+
   }
 
 
