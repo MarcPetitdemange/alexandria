@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LibraryService } from '../../../services/library/library.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { MapUtils } from 'src/app/model/MapUtils';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-library',
@@ -28,6 +29,18 @@ export class LibraryPage implements OnInit {
       this.allBooks = MapUtils.mapBook(value);
     });
   }
+
+  editBook(book): void {
+    this.modalBook.editMode = true;
+    this.modalBook.toggleOpen();
+    this.modalBook.book = new FormGroup({
+      id: new FormControl(book.id),
+      title: new FormControl(book.title),
+      description: new FormControl(book.description),
+      categories: new FormArray( [ new FormControl({title: 'sloub'})])
+    });
+  }
+
 
   deleteBook(uid: string): void {
     this.libraryService.deleteBookById(uid);

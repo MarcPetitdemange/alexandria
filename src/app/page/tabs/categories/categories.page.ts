@@ -25,14 +25,16 @@ export class CategoriesPage implements OnInit {
 
   refreshCategoriesList(){
     this.categoriesService.getAllCategories().subscribe((value) => {
-      debugger;
       this.allCategories = MapUtils.mapBook(value);
     });
   }
 
   editCategory(category: any){
+    debugger;
+    this.modalCategory.editMode = true;
     this.modalCategory.toggleOpen();
     this.modalCategory.category = new FormGroup({
+      id: new FormControl(category.id),
       title: new FormControl(category.title),
       description: new FormControl(category.description),
     });

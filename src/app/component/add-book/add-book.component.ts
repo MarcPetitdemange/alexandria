@@ -24,6 +24,8 @@ export class AddBookComponent implements OnInit {
 
   isOpen = false;
 
+  editMode = false;
+
   constructor(private libraryService: LibraryService, private categoriesService: CategoriesService, private actionSheetCtrl: ActionSheetController) {
     this.book = new FormGroup({
       title: new FormControl(''),
@@ -43,11 +45,19 @@ export class AddBookComponent implements OnInit {
   }
 
   submit(){
-    this.libraryService.addBook(this.book.value).then(value => {
-      this.modalBook.dismiss();
-      this.cleanForm();
-      this.refresh.emit();
-    });
+    if(this.editMode) {
+      this.libraryService.editBook(this.book.value).then(value => {
+        this.modalBook.dismiss();
+        this.cleanForm();
+        this.refresh.emit();
+      });
+    } else {
+      this.libraryService.addBook(this.book.value).then(value => {
+        this.modalBook.dismiss();
+        this.cleanForm();
+        this.refresh.emit();
+      });
+    }
   }
 
   cleanForm(){

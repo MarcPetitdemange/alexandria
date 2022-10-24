@@ -19,6 +19,8 @@ export class AddCategorieComponent implements OnInit {
 
   isOpen = false;
 
+  editMode = false;
+
   constructor( private categoriesService: CategoriesService) {
     this.category = new FormGroup({
       title: new FormControl(''),
@@ -36,11 +38,19 @@ export class AddCategorieComponent implements OnInit {
   }
 
   submit(){
-    this.categoriesService.addCategory(this.category.value).then(value => {
-      this.modalCategory.dismiss();
-      this.cleanForm();
-      this.refresh.emit();
-    });
+    if(this.editMode) {
+      this.categoriesService.editCategorie(this.category.value).then(value => {
+        this.modalCategory.dismiss();
+        this.cleanForm();
+        this.refresh.emit();
+      });
+    } else {
+      this.categoriesService.addCategory(this.category.value).then(value => {
+        this.modalCategory.dismiss();
+        this.cleanForm();
+        this.refresh.emit();
+      });
+    }
   }
 
 

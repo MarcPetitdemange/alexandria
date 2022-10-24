@@ -1,4 +1,4 @@
-<ion-modal #modal trigger="open-modal-book" [isOpen]="isOpen" (didDismiss)="isOpen = false" (didPresent)="refreshListCategories()">
+<ion-modal #modal trigger="open-modal-book" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false;" (didPresent)="refreshListCategories()">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -12,6 +12,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <form [formGroup]="book" (ngSubmit)="submit()">
+        <ion-input formControlName="id" type="hidden"></ion-input>
         <ion-item counter="true">
           <ion-label position="floating">Title</ion-label>
           <ion-input formControlName="title" type="text" maxlength="20"></ion-input>
@@ -22,7 +23,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Categories</ion-label>
-          <ion-select formControlName="categories" [multiple]="true" value="">
+          <ion-select formControlName="categories" [multiple]="true">
             <ion-select-option *ngFor="let category of listCategories" [value]="category">{{category.title}}</ion-select-option>
           </ion-select>
         </ion-item>

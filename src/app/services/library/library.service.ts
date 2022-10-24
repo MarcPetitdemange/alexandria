@@ -19,6 +19,10 @@ export class LibraryService {
     return this.bookCollectionRef.get();
   }
 
+  editBook(book){
+    return this.firestore.doc('/books/' + book.id).update(book);
+  }
+
   deleteBookById(id: string) {
     const bookRef = this.firestore.doc('/books/' + id);
     bookRef.delete();

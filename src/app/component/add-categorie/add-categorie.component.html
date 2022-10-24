@@ -1,4 +1,4 @@
-<ion-modal #modalCategory trigger="open-modal-category" [isOpen]="isOpen" (didDismiss)="isOpen = false">
+<ion-modal #modalCategory trigger="open-modal-category" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false;">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -12,6 +12,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <form [formGroup]="category" (ngSubmit)="submit()">
+        <ion-input formControlName="id" type="hidden"></ion-input>
         <ion-item counter="true">
           <ion-label position="floating">Title</ion-label>
           <ion-input formControlName="title" type="text" maxlength="20"></ion-input>

@@ -20,6 +20,10 @@ export class CategoriesService {
     return this.categoriesCollectionRef.get();
   }
 
+  editCategorie(category){
+    return this.firestore.doc('/categories/' + category.id).update(category);
+  }
+
   deleteCategoryById(id: string) {
     const categorieRef = this.firestore.doc('/categories/' + id);
     categorieRef.delete();
