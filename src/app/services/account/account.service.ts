@@ -16,12 +16,10 @@ export class AccountService {
 
   async getCurrentUserInformations(){
     this.loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));
-    debugger;
     return this.loggedUser;
   }
 
   async connect(credentials,error,valid){
-
     try{
       const userData = await this.ngFireAuth.signInWithEmailAndPassword(credentials.email, credentials.password);
       this.loggedUser = userData.user;
@@ -37,24 +35,12 @@ export class AccountService {
         error: e,
       };
     }
+  }
 
-  //   .then(value => {
-  //     this.loggedUser = value.user;
-  //     sessionStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
-  //     valid = true;
-  //     error = null;
-  //     return {
-  //       valid: true,
-  //       error: null,
-  //     };
-  //   }).catch(error => {
-  //     error = error;
-  //     valid = false;
-  //     return {
-  //       valid: false,
-  //       error,
-  //     };
-  //   });
-  // }
+  signOut(){
+    return this.ngFireAuth.signOut().then(() => {
+      sessionStorage.removeItem('loggedUser');
+      this.router.navigate(['login']);
+    });
   }
 }

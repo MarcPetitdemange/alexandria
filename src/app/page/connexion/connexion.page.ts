@@ -21,11 +21,8 @@ export class ConnexionPage implements OnInit {
 
   async connect(){
     const statut: any = await this.accountService.connect(this.credentials,this.error,this.valid);
-    debugger;
     this.error = statut.error;
     this.valid = statut.valid;
-
-
   }
 
 

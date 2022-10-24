@@ -1,3 +1,4 @@
+import { MapUtils } from 'src/app/model/MapUtils';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/compat/database';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -7,13 +8,16 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class CategoriesService {
 
+  public categoriesCollectionRef;
 
   constructor(
-    private firestore: AngularFirestore) { }
+    private firestore: AngularFirestore) {
+        this.categoriesCollectionRef = this.firestore.collection('categories');
+    }
 
 
   getAllCategories() {
-    return this.firestore.collection('categories').get();
+    return this.categoriesCollectionRef.get();
   }
 
   deleteCategoryById(id: string) {
@@ -22,6 +26,6 @@ export class CategoriesService {
   }
 
   addCategory(book: any){
-    return this.firestore.collection('categories').add(book);
+    return this.categoriesCollectionRef.add(book);
   }
 }

@@ -4,6 +4,7 @@ import { MapUtils } from 'src/app/model/MapUtils';
 import { AlertController } from '@ionic/angular';
 import { AddCategorieComponent } from 'src/app/component/add-categorie/add-categorie.component';
 import { FormControl, FormGroup } from '@angular/forms';
+import { debug } from 'console';
 
 @Component({
   selector: 'app-categories',
@@ -24,6 +25,7 @@ export class CategoriesPage implements OnInit {
 
   refreshCategoriesList(){
     this.categoriesService.getAllCategories().subscribe((value) => {
+      debugger;
       this.allCategories = MapUtils.mapBook(value);
     });
   }

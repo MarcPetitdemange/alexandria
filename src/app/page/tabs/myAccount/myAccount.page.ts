@@ -19,7 +19,7 @@ export class MyAccountPage implements OnInit {
   }
 
   disconnect(){
-    this.router.navigateByUrl('/login', { replaceUrl:true });
+    this.accountService.signOut();
   }
 
 }

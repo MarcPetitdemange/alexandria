@@ -7,12 +7,16 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class LibraryService {
 
+  public bookCollectionRef;
+
   constructor(
-    private db: AngularFireDatabase, private firestore: AngularFirestore) { }
+    private db: AngularFireDatabase, private firestore: AngularFirestore) {
+      this.bookCollectionRef = this.firestore.collection('books');
+    }
 
 
   getAllLibrary() {
-    return this.firestore.collection('books').get();
+    return this.bookCollectionRef.get();
   }
 
   deleteBookById(id: string) {
@@ -21,6 +25,8 @@ export class LibraryService {
   }
 
   addBook(book: any){
-    return this.firestore.collection('books').add(book);
+    // book.categories = book.categories.map(category => this.bookCollectionRef.doc(category.id).ref);
+    debugger;
+    return this.bookCollectionRef.add(book);
   }
 }
