@@ -20,16 +20,22 @@
     </ion-card-header>
 
     <ion-card-content>
-      {{book.description}}
-      <ion-button (click)="editBook(book)">
-        <ion-icon name="pencil"></ion-icon>
-      </ion-button>
-      <ion-button (click)="deleteBook(book.id)">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
+      <p>{{book.description}}</p>
+      <ion-chip *ngFor="let categorie of book.categories ">{{categorie.title}}</ion-chip>
+      <div class="align-right">
+        <ion-fab style="position: relative;">
+          <ion-fab-button (click)="editBook(book)" size="small">
+            <ion-icon name="pencil"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <ion-fab style="position: relative;">
+          <ion-fab-button (click)="deleteBook(book.id)" size="small" color="danger">
+            <ion-icon name="trash"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </div>
     </ion-card-content>
 
-    <ion-chip *ngFor="let categorie of book.categories ">{{categorie.title}}</ion-chip>
   </ion-card>
 
 

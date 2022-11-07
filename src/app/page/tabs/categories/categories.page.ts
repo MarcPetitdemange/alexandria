@@ -30,7 +30,6 @@ export class CategoriesPage implements OnInit {
   }
 
   editCategory(category: any){
-    debugger;
     this.modalCategory.editMode = true;
     this.modalCategory.toggleOpen();
     this.modalCategory.category = new FormGroup({

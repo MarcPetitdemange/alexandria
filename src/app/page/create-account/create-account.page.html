@@ -5,65 +5,64 @@
 </ion-header>
 
 <ion-content>
-
-
-
-  <ion-card>
-    <ion-grid>
-      <ion-row class="camera">
-        <ion-button class="rounded" (click)="pictureChoice()">
-          <ion-icon name="camera-outline"></ion-icon>
-        </ion-button>
-        <div class="align" *ngIf="credentials?.photo !== null && credentials?.photo !== undefined">
-          <ion-img class="rounded" [src]="credentials?.photo?.webviewPath"></ion-img>
-          <ion-button size="large" (click)="cancelPicture()" color="danger">
-            <ion-icon slot="icon-only" name="trash" ></ion-icon>
+  <form [formGroup]="credentials" (ngSubmit)="submit">
+    <ion-card>
+      <ion-grid>
+        <ion-row class="camera">
+          <ion-button class="rounded" (click)="pictureChoice()">
+            <ion-icon name="camera-outline"></ion-icon>
           </ion-button>
-        </div>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <ion-label position="floating">Lastname </ion-label>
-          <ion-input [(ngModel)]="credentials.lastname"></ion-input>
-        </ion-item>
+          <div class="align" *ngIf="credentials?.photo !== null && credentials?.photo !== undefined">
+            <ion-img class="rounded" [src]="credentials?.photo?.webviewPath"></ion-img>
+            <ion-button size="large" (click)="cancelPicture()" color="danger">
+              <ion-icon slot="icon-only" name="trash" ></ion-icon>
+            </ion-button>
+          </div>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label position="floating">Lastname </ion-label>
+            <ion-input formControlName="lastname"></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Firstname </ion-label>
-          <ion-input [(ngModel)]="credentials.firstname"></ion-input>
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <ion-label position="floating">Phone </ion-label>
-          <ion-input type="tel" [(ngModel)]="credentials.phone"></ion-input>
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <ion-label position="floating">Email </ion-label>
-          <ion-input type="email" [(ngModel)]="credentials.email"></ion-input>
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" clearInput [(ngModel)]="credentials.password"></ion-input>
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <ion-label position="floating">Confirm Password</ion-label>
-          <ion-input type="password" clearInput [(ngModel)]="credentials.confirmPassword"></ion-input>
-        </ion-item>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+          <ion-item>
+            <ion-label position="floating">Firstname </ion-label>
+            <ion-input formControlName="firstname"></ion-input>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label position="floating">Phone </ion-label>
+            <ion-input type="tel" formControlName="phone"></ion-input>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label position="floating">Email </ion-label>
+            <ion-input type="email" formControlName="email" ></ion-input>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" clearInput formControlName="password"></ion-input>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input type="password" clearInput formControlName="confirmPassword"></ion-input>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
 
-  <ion-card>
-   <ion-button expand="block" color="primary" (click)="createAccount()">Confirm</ion-button>
-   <ion-button expand="block" color="secondary" (click)="cancel()">Cancel</ion-button>
-   <a [routerLink]="'/login'">I already have an account</a>
-  </ion-card>
+    <ion-card>
+    <ion-button expand="block" color="primary" type="submit">Confirm</ion-button>
+    <ion-button expand="block" color="secondary" (click)="cancel()">Cancel</ion-button>
+    <a [routerLink]="'/login'">I already have an account</a>
+    </ion-card>
+  </form>
 
 
 

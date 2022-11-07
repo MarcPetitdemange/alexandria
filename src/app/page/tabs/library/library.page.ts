@@ -1,3 +1,4 @@
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { AddBookComponent } from './../../../component/add-book/add-book.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LibraryService } from '../../../services/library/library.service';
@@ -17,7 +18,8 @@ export class LibraryPage implements OnInit {
   allBooks: any[] = [];
 
   constructor(
-    private libraryService: LibraryService
+    private libraryService: LibraryService,
+    private categoriesService: CategoriesService
   ) {}
 
   ngOnInit(): void {
@@ -33,12 +35,14 @@ export class LibraryPage implements OnInit {
   editBook(book): void {
     this.modalBook.editMode = true;
     this.modalBook.toggleOpen();
-    this.modalBook.book = new FormGroup({
-      id: new FormControl(book.id),
-      title: new FormControl(book.title),
-      description: new FormControl(book.description),
-      categories: new FormArray( [ new FormControl({title: 'sloub'})])
+
+    this.modalBook.book.patchValue({
+      id: book.id,
+      title: book.title,
+      description: book.description,
+      categories: book.categories
     });
+    this.modalBook.book.controls.categories.patchValue(book.categories);
   }
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 
@@ -14,7 +15,19 @@ export class CreateAccountPage implements OnInit {
   error: string;
   credentials: any = {};
 
-  constructor(public ngFireAuth: AngularFireAuth, private firestorage: AngularFireStorage, private firestore: AngularFirestore, private actionSheetCtrl: ActionSheetController) { }
+  constructor(public ngFireAuth: AngularFireAuth,
+     private firestorage: AngularFireStorage,
+     private firestore: AngularFirestore,
+    private actionSheetCtrl: ActionSheetController) {
+      this.credentials = new FormGroup({
+        firstname: new FormControl(''),
+        lastname: new FormControl(''),
+        email: new FormControl(''),
+        phone: new FormControl(''),
+        password: new FormControl(''),
+        confirmPassword: new FormControl('')
+      });
+    }
 
   ngOnInit() {
   }
@@ -74,9 +87,9 @@ export class CreateAccountPage implements OnInit {
     };
   }
 
-  createAccount(){
+  submit(){
+
     this.ngFireAuth.createUserWithEmailAndPassword(this.credentials.email,this.credentials.password).then((userCredential) => {
-      debugger;
       const user = {
         uid: userCredential.user.uid,
         lastname: this.credentials.lastname,

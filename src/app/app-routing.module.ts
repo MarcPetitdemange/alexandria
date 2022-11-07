@@ -20,7 +20,15 @@ const routes: Routes = [
 		path: '',
 		redirectTo: '/login',
 		pathMatch: 'full'
-	}
+	},
+  {
+    path: '**',
+		redirectTo: '/not-found',
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./page/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  }
 ];
 @NgModule({
   imports: [

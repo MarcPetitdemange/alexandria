@@ -1,8 +1,7 @@
 import { CategoriesService } from './../../services/categories/categories.service';
 import { LibraryService } from './../../services/library/library.service';
-import { LibraryPage } from './../../page/tabs/library/library.page';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { ActionSheetController, IonModal } from '@ionic/angular';
 import { MapUtils } from 'src/app/model/MapUtils';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -20,18 +19,23 @@ export class AddBookComponent implements OnInit {
 
   @Input() public book: FormGroup;
 
-  public listCategories;
+  public listCategories: Array<any>;
 
   isOpen = false;
 
   editMode = false;
 
-  constructor(private libraryService: LibraryService, private categoriesService: CategoriesService, private actionSheetCtrl: ActionSheetController) {
-    this.book = new FormGroup({
-      title: new FormControl(''),
-      description: new FormControl(''),
-      categories: new FormControl([])
-    });
+  constructor(private libraryService: LibraryService,
+     private categoriesService: CategoriesService,
+     private actionSheetCtrl: ActionSheetController) {
+      this.book = new FormGroup({
+        title: new FormControl(''),
+        description: new FormControl(''),
+        categories: new FormGroup({
+          title: new FormControl(),
+          description: new FormControl()
+        })
+      });
   }
 
   ngOnInit() {

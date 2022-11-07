@@ -8,13 +8,29 @@
 
 <ion-content [fullscreen]="true">
 
+  <div class="align" *ngIf="this.accountService?.loggedUser?.photo !== null && this.accountService?.loggedUser?.photo !== undefined">
+    <ion-img class="rounded" [src]="this.accountService?.loggedUser?.photo"></ion-img>
+  </div>
+
   <ion-item>
     <ion-label>Email</ion-label>
-    {{this.accountService?.loggedUser.email}}
+    <a [href]="'mailto:' + this.accountService?.loggedUser.email">{{this.accountService?.loggedUser.email}}</a>
   </ion-item>
   <ion-item>
-    <ion-label>Email</ion-label>
-    {{this.accountService?.loggedUser.email}}
+    <ion-label>Phone number</ion-label>
+    <a [href]="'tel:' + this.accountService?.loggedUser.phone">{{this.accountService?.loggedUser.phone}}</a>
+  </ion-item>
+  <ion-item>
+    <ion-label>Lastname</ion-label>
+    {{this.accountService?.loggedUser.lastname}}
+  </ion-item>
+  <ion-item>
+    <ion-label>Firstname</ion-label>
+    {{this.accountService?.loggedUser.firstname}}
+  </ion-item>
+  <ion-item>
+    <ion-label>Account creation date</ion-label>
+    {{this.accountService?.loggedUser.firstname}}
   </ion-item>
 
 

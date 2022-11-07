@@ -14,8 +14,6 @@ export class MyAccountPage implements OnInit {
 
 
   ngOnInit(): void {
-    this.accountService.getCurrentUserInformations();
-    console.log(this.accountService?.loggedUser.email);
   }
 
   disconnect(){

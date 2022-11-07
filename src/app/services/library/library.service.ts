@@ -30,7 +30,6 @@ export class LibraryService {
 
   addBook(book: any){
     // book.categories = book.categories.map(category => this.bookCollectionRef.doc(category.id).ref);
-    debugger;
     return this.bookCollectionRef.add(book);
   }
 }

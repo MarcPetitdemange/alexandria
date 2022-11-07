@@ -19,15 +19,18 @@
     </ion-card-header>
 
     <ion-card-content>
-      {{categorie.description}}
-
+      <p>{{categorie.description}}</p>
       <div class="align-right">
-        <ion-button (click)="editCategory(categorie)" shape="round">
-          <ion-icon name="pencil"></ion-icon>
-        </ion-button>
-        <ion-button (click)="deleteCategorie(categorie.id)" shape="round" color="danger">
-          <ion-icon name="trash"></ion-icon>
-        </ion-button>
+        <ion-fab style="position: relative;">
+          <ion-fab-button (click)="editCategory(categorie)" size="small">
+            <ion-icon name="pencil"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <ion-fab style="position: relative;">
+          <ion-fab-button (click)="deleteCategorie(categorie.id)" size="small" color="danger">
+            <ion-icon name="trash"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
       </div>
     </ion-card-content>
   </ion-card>
