@@ -1,10 +1,11 @@
-import { CategoriesService } from './../../services/categories/categories.service';
-import { LibraryService } from './../../services/library/library.service';
+import { debug } from 'console';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController, IonModal } from '@ionic/angular';
 import { MapUtils } from 'src/app/model/MapUtils';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { CategoriesService } from './../../services/categories/categories.service';
+import { LibraryService } from './../../services/library/library.service';
 
 @Component({
   selector: 'app-add-book',
@@ -29,12 +30,11 @@ export class AddBookComponent implements OnInit {
      private categoriesService: CategoriesService,
      private actionSheetCtrl: ActionSheetController) {
       this.book = new FormGroup({
+        id: new FormControl(),
         title: new FormControl(''),
         description: new FormControl(''),
-        categories: new FormGroup({
-          title: new FormControl(),
-          description: new FormControl()
-        })
+        author: new FormControl(''),
+        categories: new FormControl(null)
       });
   }
 
@@ -42,6 +42,9 @@ export class AddBookComponent implements OnInit {
     this.refreshListCategories();
   }
 
+  compareWith(o1, o2) {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  }
 
   cancel(){
     this.modalBook.dismiss();
@@ -50,6 +53,7 @@ export class AddBookComponent implements OnInit {
 
   submit(){
     if(this.editMode) {
+      debugger;
       this.libraryService.editBook(this.book.value).then(value => {
         this.modalBook.dismiss();
         this.cleanForm();

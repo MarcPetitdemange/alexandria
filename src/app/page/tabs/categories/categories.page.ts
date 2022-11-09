@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { AddCategorieComponent } from 'src/app/component/add-categorie/add-categorie.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debug } from 'console';
+import Category from 'src/app/model/Category';
 
 @Component({
   selector: 'app-categories',
@@ -26,6 +27,7 @@ export class CategoriesPage implements OnInit {
   refreshCategoriesList(){
     this.categoriesService.getAllCategories().subscribe((value) => {
       this.allCategories = MapUtils.mapBook(value);
+      this.allCategories = this.allCategories.sort(Category.sortCriteria);
     });
   }
 

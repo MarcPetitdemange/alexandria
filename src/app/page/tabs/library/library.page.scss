@@ -1,0 +1,13 @@
+
+.booksGrid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media only screen and (min-width: 700px)  {
+  .booksGrid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+

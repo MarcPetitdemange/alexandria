@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { AddBookComponent } from './../../../component/add-book/add-book.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -5,6 +6,7 @@ import { LibraryService } from '../../../services/library/library.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { MapUtils } from 'src/app/model/MapUtils';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import Book from 'src/app/model/Book';
 
 @Component({
   selector: 'app-library',
@@ -16,19 +18,31 @@ export class LibraryPage implements OnInit {
   @ViewChild(AddBookComponent) modalBook: AddBookComponent;
 
   allBooks: any[] = [];
+  allBooksResult: any[] = [];
+
+  currentFilterTitle: string;
 
   constructor(
     private libraryService: LibraryService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit(): void {
    this.refreshBookList();
   }
 
+  search($event){
+    this.currentFilterTitle = $event.target.value.toLowerCase();
+    this.allBooksResult = Book.filterByTitle(this.currentFilterTitle, this.allBooks);
+  }
+
   refreshBookList(){
     this.libraryService.getAllLibrary().subscribe((value) => {
+      this.currentFilterTitle = null;
       this.allBooks = MapUtils.mapBook(value);
+      this.allBooks.sort(Book.sortCriteria);
+      this.allBooksResult = Book.filterByTitle(this.currentFilterTitle, this.allBooks);
     });
   }
 
@@ -40,15 +54,32 @@ export class LibraryPage implements OnInit {
       id: book.id,
       title: book.title,
       description: book.description,
+      author: book.author,
       categories: book.categories
     });
-    this.modalBook.book.controls.categories.patchValue(book.categories);
   }
 
 
-  deleteBook(uid: string): void {
-    this.libraryService.deleteBookById(uid);
-    this.refreshBookList();
+  async deleteBook(uid: string) {
+    const alert = await this.alertController.create({
+      header: 'Warning !',
+      message: 'You\'re going to delete this book.<br> Do you want to continue ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.libraryService.deleteBookById(uid);
+            this.refreshBookList();
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   async scanBook() {

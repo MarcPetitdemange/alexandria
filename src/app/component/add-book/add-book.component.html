@@ -15,15 +15,19 @@
         <ion-input formControlName="id" type="hidden"></ion-input>
         <ion-item counter="true">
           <ion-label position="floating">Title</ion-label>
-          <ion-input formControlName="title" type="text" maxlength="20"></ion-input>
+          <ion-input formControlName="title" type="text" maxlength="40"></ion-input>
         </ion-item>
         <ion-item counter="true">
           <ion-label position="floating">Description</ion-label>
           <ion-textarea formControlName="description" type="text" [autoGrow]="true" maxlength="300"></ion-textarea>
         </ion-item>
+        <ion-item counter="true">
+          <ion-label position="floating">Author</ion-label>
+          <ion-input formControlName="author" type="text" maxlength="40"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label position="floating">Categories</ion-label>
-          <ion-select formControlName="categories" [multiple]="true">
+          <ion-select formControlName="categories" [compareWith]="compareWith" interface="action-sheet" [multiple]="true">
             <ion-select-option *ngFor="let category of this.listCategories " [value]="category">{{category.title}}</ion-select-option>
           </ion-select>
         </ion-item>

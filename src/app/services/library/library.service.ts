@@ -20,6 +20,7 @@ export class LibraryService {
   }
 
   editBook(book){
+    debugger;
     return this.firestore.doc('/books/' + book.id).update(book);
   }
 
