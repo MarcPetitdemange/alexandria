@@ -1,3 +1,4 @@
+import { SelectPictureComponent } from 'src/app/component/shared/select-picture/select-picture.component';
 import { AddBookComponent } from './../../../component/add-book/add-book.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,6 @@ import { LibraryRoutingModule } from './library-routing.module';
     LibraryRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [LibraryPage, AddBookComponent]
+  declarations: [LibraryPage, AddBookComponent, SelectPictureComponent]
 })
 export class LibraryPageModule {}

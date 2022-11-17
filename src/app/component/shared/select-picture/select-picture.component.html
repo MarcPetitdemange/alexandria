@@ -1,0 +1,14 @@
+<div class="pictureSelector" [formGroup]="parentForm">
+  <div *ngIf="parentForm.get(formControlName).value === null || parentForm.get(formControlName).value === undefined">
+    <ion-button class="rounded" (click)="pictureChoice()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <ion-input [formControlName]="formControlName" style="display: none;" [value]="photo"></ion-input>
+  <div class="align" *ngIf="parentForm.get(formControlName).value !== null && parentForm.get(formControlName).value !== undefined">
+    <ion-img class="rounded" [src]="photo?.webviewPath"></ion-img>
+    <ion-button size="large" (click)="cancelPicture()" color="danger">
+      <ion-icon slot="icon-only" name="trash" ></ion-icon>
+    </ion-button>
+  </div>
+</div>

@@ -5,19 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="credentials" (ngSubmit)="submit">
+  <form [formGroup]="credentialsForm" (ngSubmit)="submit">
     <ion-card>
       <ion-grid>
         <ion-row class="camera">
-          <ion-button class="rounded" (click)="pictureChoice()">
-            <ion-icon name="camera-outline"></ion-icon>
-          </ion-button>
-          <div class="align" *ngIf="credentials?.photo !== null && credentials?.photo !== undefined">
-            <ion-img class="rounded" [src]="credentials?.photo?.webviewPath"></ion-img>
-            <ion-button size="large" (click)="cancelPicture()" color="danger">
-              <ion-icon slot="icon-only" name="trash" ></ion-icon>
-            </ion-button>
-          </div>
+          <app-select-picture [parentForm]="credentialsForm"></app-select-picture>
         </ion-row>
         <ion-row>
           <ion-item>

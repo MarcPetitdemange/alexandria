@@ -13,88 +13,30 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class CreateAccountPage implements OnInit {
   error: string;
-  credentials: any = {};
+  credentialsForm: any = {};
 
   constructor(public ngFireAuth: AngularFireAuth,
      private firestorage: AngularFireStorage,
-     private firestore: AngularFirestore,
-    private actionSheetCtrl: ActionSheetController) {
-      this.credentials = new FormGroup({
-        firstname: new FormControl(''),
-        lastname: new FormControl(''),
-        email: new FormControl(''),
-        phone: new FormControl(''),
-        password: new FormControl(''),
-        confirmPassword: new FormControl('')
-      });
-    }
+     private firestore: AngularFirestore) {}
 
-  ngOnInit() {
-  }
-
-
-  async pictureChoice(){
-    const actionSheet = await this.actionSheetCtrl.create({
-      buttons: [
-        {
-          text: 'Camera',
-          role: 'destructive',
-          handler: () => this.takePicture()
-        },
-        {
-          text: 'Gallery',
-          role: 'destructive',
-          handler: () => this.choosePictureFromGallery()
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-      ]
+  ngOnInit(): void {
+    this.credentialsForm = new FormGroup({
+      firstname: new FormControl(''),
+      lastname: new FormControl(''),
+      email: new FormControl(''),
+      phone: new FormControl(''),
+      password: new FormControl(''),
+      confirmPassword: new FormControl('')
     });
-
-    await actionSheet.present();
-    const result = await actionSheet.onDidDismiss();
-  }
-
-  async takePicture() {
-    const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100
-    });
-
-    this.credentials.photo = {
-      filepath: "soon...",
-      webviewPath: capturedPhoto.webPath
-    };
-  }
-
-  cancelPicture(){
-    this.credentials.photo = null;
-  }
-
-  async choosePictureFromGallery(){
-    const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
-      quality: 100
-    });
-
-    this.credentials.photo = {
-      filepath: "soon...",
-      webviewPath: capturedPhoto.webPath
-    };
   }
 
   submit(){
-
-    this.ngFireAuth.createUserWithEmailAndPassword(this.credentials.email,this.credentials.password).then((userCredential) => {
+    this.ngFireAuth.createUserWithEmailAndPassword(this.credentialsForm.email,this.credentialsForm.password).then((userCredential) => {
       const user = {
         uid: userCredential.user.uid,
-        lastname: this.credentials.lastname,
-        firstname: this.credentials.firstname,
-        phone: this.credentials.phone
+        lastname: this.credentialsForm.lastname,
+        firstname: this.credentialsForm.firstname,
+        phone: this.credentialsForm.phone
       };
       this.setUserData(user);
     })
@@ -112,8 +54,8 @@ export class CreateAccountPage implements OnInit {
     );
 
 
-    if(this.credentials.photo != null && this.credentials.photo.webviewPath != null){
-      const response = await fetch(this.credentials.photo.webviewPath);
+    if(this.credentialsForm.photo != null && this.credentialsForm.photo.webviewPath != null){
+      const response = await fetch(this.credentialsForm.photo.webviewPath);
       const blob = await response.blob();
       this.firestorage.upload('/userPictures/' + user.uid, blob);
     }
@@ -132,6 +74,6 @@ export class CreateAccountPage implements OnInit {
   }
 
   cancel(){
-    this.credentials = {};
+    this.credentialsForm.reset();
   }
 }

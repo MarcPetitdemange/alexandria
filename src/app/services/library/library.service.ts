@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/compat/database';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
@@ -9,8 +8,7 @@ export class LibraryService {
 
   public bookCollectionRef;
 
-  constructor(
-    private db: AngularFireDatabase, private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore) {
       this.bookCollectionRef = this.firestore.collection('books');
     }
 
@@ -20,7 +18,6 @@ export class LibraryService {
   }
 
   editBook(book){
-    debugger;
     return this.firestore.doc('/books/' + book.id).update(book);
   }
 

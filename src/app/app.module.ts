@@ -1,4 +1,4 @@
-import { AddCategorieComponent } from './component/add-categorie/add-categorie.component';
+import { SelectPictureComponent } from './component/shared/select-picture/select-picture.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -10,11 +10,9 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { initializeApp } from '@angular/fire/app';
-import { getAuth } from 'firebase/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 
 export const firebaseConfig = {
@@ -28,7 +26,7 @@ export const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SelectPictureComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

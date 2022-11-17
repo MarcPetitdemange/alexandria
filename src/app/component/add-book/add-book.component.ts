@@ -46,20 +46,25 @@ export class AddBookComponent implements OnInit {
     return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
 
+  /**
+   * Cancel the modifications in the form and close the modal
+   */
   cancel(){
     this.modalBook.dismiss();
     this.cleanForm();
   }
 
+  /**
+   * Submit the modifications in the form
+   */
   submit(){
-    if(this.editMode) {
-      debugger;
+    if(this.editMode) { // If we are in edition mode
       this.libraryService.editBook(this.book.value).then(value => {
         this.modalBook.dismiss();
         this.cleanForm();
         this.refresh.emit();
       });
-    } else {
+    } else { // If we are in creation (add) mode
       this.libraryService.addBook(this.book.value).then(value => {
         this.modalBook.dismiss();
         this.cleanForm();
@@ -68,10 +73,17 @@ export class AddBookComponent implements OnInit {
     }
   }
 
+  /**
+   * Clean the form fields (reset to empty / null)
+   */
   cleanForm(){
     this.book.reset();
   }
 
+  /**
+   * If the modal is open, then close the modal
+   * If the modal is close then open the modal
+   */
   public toggleOpen(){
     this.isOpen = !this.isOpen;
   }
@@ -105,6 +117,9 @@ export class AddBookComponent implements OnInit {
     const result = await actionSheet.onDidDismiss();
   }
 
+  /**
+   * Open the camera of the device to take a photo
+   */
   async takePicture() {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
@@ -113,10 +128,9 @@ export class AddBookComponent implements OnInit {
     });
   }
 
-  cancelPicture(){
-
-  }
-
+  /**
+   * Open the gallery of the smartphone to select a picture
+   */
   async choosePictureFromGallery(){
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,

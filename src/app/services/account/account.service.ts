@@ -35,7 +35,7 @@ export class AccountService {
       this.loggedUser.lastname = moreInformation.lastname;
       this.loggedUser.phone = moreInformation.phone;
       this.loggedUser.photo = await this.storage.ref(moreInformation.photo).getDownloadURL().toPromise();
-      debugger;
+      this.loggedUser.creationDate = new Date(userData.user.metadata.creationTime);
       sessionStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
       setTimeout(() => this.router.navigateByUrl('/tabs', { replaceUrl:true }), 1000);
       return {

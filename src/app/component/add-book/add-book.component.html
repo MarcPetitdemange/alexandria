@@ -31,18 +31,7 @@
             <ion-select-option *ngFor="let category of this.listCategories " [value]="category">{{category.title}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button class="rounded" (click)="pictureChoice()">
-          <ion-icon name="camera-outline"></ion-icon>
-        </ion-button>
-        <div class="bottom-menu">
-          <ion-button shape="round" color="secondary" (click)="cancel()">
-            <ion-icon slot="start" name="close-circle"></ion-icon>Cancel
-          </ion-button>
-          <ion-button shape="round" color="primary" type="submit">
-            <ion-icon slot="start" name="checkmark"></ion-icon>
-            Confirm
-          </ion-button>
-        </div>
+        <app-select-picture [parentForm]="book"></app-select-picture>
       </form>
     </ion-content>
   </ng-template>
