@@ -25,6 +25,21 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+form.alexandria-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .bottom-menu{
+    display: flex;
+    justify-content: right;
+  }
+
+  .bottom-menu > ion-button{
+    margin:0.5rem;
+  }
+}
 
 .align-right{
   display: flex;

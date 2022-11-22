@@ -1,4 +1,3 @@
-import { debug } from 'console';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';

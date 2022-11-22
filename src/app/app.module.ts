@@ -1,7 +1,9 @@
-import { SelectPictureComponent } from './component/shared/select-picture/select-picture.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import {
+  SharedComponentModule
+} from './component/shared-module/shared-component.module';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -14,19 +16,18 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
-
 export const firebaseConfig = {
-  apiKey: "AIzaSyAEnBp7DKlRAy-qlRM_IoT2N27NiC2yqfg",
-  authDomain: "alexandria-2c577.firebaseapp.com",
-  projectId: "alexandria-2c577",
-  storageBucket: "alexandria-2c577.appspot.com",
-  messagingSenderId: "455937122552",
-  appId: "1:455937122552:web:8278a56e6a2aa55db75b0d",
-  measurementId: "G-93T6RL3P42"
+  apiKey: 'AIzaSyAEnBp7DKlRAy-qlRM_IoT2N27NiC2yqfg',
+  authDomain: 'alexandria-2c577.firebaseapp.com',
+  projectId: 'alexandria-2c577',
+  storageBucket: 'alexandria-2c577.appspot.com',
+  messagingSenderId: '455937122552',
+  appId: '1:455937122552:web:8278a56e6a2aa55db75b0d',
+  measurementId: 'G-93T6RL3P42',
 };
 
 @NgModule({
-  declarations: [AppComponent, SelectPictureComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -36,8 +37,9 @@ export const firebaseConfig = {
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    SharedComponentModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

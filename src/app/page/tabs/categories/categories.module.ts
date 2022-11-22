@@ -1,10 +1,10 @@
-import { AddCategorieComponent } from './../../../component/add-categorie/add-categorie.component';
-import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CategoriesPage } from './categories.page';
+import { IonicModule } from '@ionic/angular';
+import { SharedComponentModule } from 'src/app/component/shared-module/shared-component.module';
 import { CategoriesRoutingModule } from './categories-routing';
+import { CategoriesPage } from './categories.page';
 
 @NgModule({
   imports: [
@@ -12,8 +12,9 @@ import { CategoriesRoutingModule } from './categories-routing';
     CommonModule,
     FormsModule,
     CategoriesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedComponentModule
   ],
-  declarations: [CategoriesPage, AddCategorieComponent]
+  declarations: [CategoriesPage]
 })
 export class CategoriesPageModule {}

@@ -1,11 +1,9 @@
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { debug } from 'console';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
-import { browserSessionPersistence, setPersistence } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +33,7 @@ export class AccountService {
       this.loggedUser.lastname = moreInformation.lastname;
       this.loggedUser.phone = moreInformation.phone;
       this.loggedUser.photo = await this.storage.ref(moreInformation.photo).getDownloadURL().toPromise();
-      this.loggedUser.creationDate = new Date(userData.user.metadata.creationTime);
+      this.loggedUser.creationDate = new Date(userData.user.metadata.creationTime).toLocaleString();
       sessionStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
       setTimeout(() => this.router.navigateByUrl('/tabs', { replaceUrl:true }), 1000);
       return {

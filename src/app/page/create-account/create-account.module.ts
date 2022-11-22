@@ -7,10 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { CreateAccountPageRoutingModule } from './create-account-routing.module';
 
 import { CreateAccountPage } from './create-account.page';
-import { SelectPictureComponent } from 'src/app/component/shared/select-picture/select-picture.component';
 
 @NgModule({
-    declarations: [CreateAccountPage, SelectPictureComponent],
+    declarations: [CreateAccountPage],
     imports: [
         CommonModule,
         FormsModule,

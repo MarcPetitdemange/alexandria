@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import Book from 'src/app/model/Book';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class LibraryService {
     return this.bookCollectionRef.get();
   }
 
-  editBook(book){
-    return this.firestore.doc('/books/' + book.id).update(book);
+  editBook(book: Book){
+    return this.firestore.doc('/books/' + book.$id).update(book);
   }
 
   deleteBookById(id: string) {
@@ -26,8 +27,7 @@ export class LibraryService {
     bookRef.delete();
   }
 
-  addBook(book: any){
-    // book.categories = book.categories.map(category => this.bookCollectionRef.doc(category.id).ref);
+  addBook(book: Book){
     return this.bookCollectionRef.add(book);
   }
 }

@@ -1,10 +1,9 @@
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { MyAccountPage } from './myAccount.page';
-import { ExploreContainerComponentModule } from '../../../explore-container/explore-container.module';
 
 import { MyAccountRoutingModule } from './myAccount-routing.module';
 
@@ -13,7 +12,6 @@ import { MyAccountRoutingModule } from './myAccount-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: MyAccountPage }]),
     MyAccountRoutingModule,
   ],
