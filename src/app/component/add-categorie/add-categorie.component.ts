@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { stringLength } from '@firebase/util';
 import { IonModal } from '@ionic/angular';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 
@@ -23,8 +22,10 @@ export class AddCategorieComponent implements OnInit {
 
   constructor( private categoriesService: CategoriesService) {
     this.category = new FormGroup({
+      id: new FormControl(null),
       title: new FormControl(''),
       description: new FormControl(''),
+      color: new FormControl(null)
     });
   }
 
@@ -39,12 +40,15 @@ export class AddCategorieComponent implements OnInit {
 
   submit(){
     if(this.editMode) {
+      debugger;
       this.categoriesService.editCategorie(this.category.value).then(value => {
+        this.categoriesService.updateCategoryInBooks(this.category.value);
         this.modalCategory.dismiss();
         this.cleanForm();
         this.refresh.emit();
       });
     } else {
+      debugger;
       this.categoriesService.addCategory(this.category.value).then(value => {
         this.modalCategory.dismiss();
         this.cleanForm();

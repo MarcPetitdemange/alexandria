@@ -21,7 +21,7 @@
 
       <ion-card-content>
         <p>{{book.description}}</p>
-        <ion-chip *ngFor="let categorie of book.categories ">{{categorie.title}}</ion-chip>
+        <ion-chip *ngFor="let categorie of book.categories " [style.border-color]="categorie.color" [style.border-style]="'solid'" [style.border-width]="'2px'">{{categorie.title}}</ion-chip>
         <div class="align-right">
           <ion-fab style="position: relative;">
             <ion-fab-button (click)="editBook(book)" size="small">

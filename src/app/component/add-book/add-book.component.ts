@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormControl, FormGroup } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController, IonModal } from '@ionic/angular';
-import { MapUtils } from 'src/app/model/MapUtils';
+import { MapUtils } from 'src/app/model/utils/MapUtils';
 import { CategoriesService } from './../../services/categories/categories.service';
 import { LibraryService } from './../../services/library/library.service';
 
@@ -13,13 +13,14 @@ import { LibraryService } from './../../services/library/library.service';
 })
 export class AddBookComponent implements OnInit {
 
+
   @Output() refresh = new EventEmitter<any>();
 
   @ViewChild(IonModal) modalBook!: IonModal;
 
   @Input() public book: FormGroup;
 
-  public listCategories: Array<any>;
+  public listCategories: Array<any> = [];
 
   isOpen = false;
 
@@ -29,10 +30,10 @@ export class AddBookComponent implements OnInit {
      private categoriesService: CategoriesService,
      private actionSheetCtrl: ActionSheetController) {
       this.book = new FormGroup({
-        id: new FormControl(),
+        id: new FormControl(null),
         title: new FormControl(''),
         description: new FormControl(''),
-        author: new FormControl(''),
+        author: new FormControl(null),
         categories: new FormControl(null)
       });
   }
@@ -64,6 +65,7 @@ export class AddBookComponent implements OnInit {
         this.refresh.emit();
       });
     } else { // If we are in creation (add) mode
+      debugger;
       this.libraryService.addBook(this.book.value).then(value => {
         this.modalBook.dismiss();
         this.cleanForm();
@@ -93,50 +95,8 @@ export class AddBookComponent implements OnInit {
     });
   }
 
-  async pictureChoice(){
-    const actionSheet = await this.actionSheetCtrl.create({
-      buttons: [
-        {
-          text: 'Camera',
-          role: 'destructive',
-          handler: () => this.takePicture()
-        },
-        {
-          text: 'Gallery',
-          role: 'destructive',
-          handler: () => this.choosePictureFromGallery()
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-      ]
-    });
-    await actionSheet.present();
-    const result = await actionSheet.onDidDismiss();
+  handleUndefinedValue($event: any) {
+    let value = $event.target.value;
+    $event.target.value = (value === undefined)? null : value;
   }
-
-  /**
-   * Open the camera of the device to take a photo
-   */
-  async takePicture() {
-    const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100
-    });
-  }
-
-  /**
-   * Open the gallery of the smartphone to select a picture
-   */
-  async choosePictureFromGallery(){
-    const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
-      quality: 100
-    });
-  }
-
-
 }

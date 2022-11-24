@@ -8,21 +8,21 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-card *ngFor="let categorie of this.allCategories">
+  <ion-card *ngFor="let category of this.allCategories"  [style.border-color]="category.color" [style.border-style]="'solid'">
     <ion-card-header >
-      <ion-card-title>{{categorie.title}}</ion-card-title>
+      <ion-card-title>{{category.title}}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <p>{{categorie.description}}</p>
+      <p>{{category.description}}</p>
       <div class="align-right">
         <ion-fab style="position: relative;">
-          <ion-fab-button (click)="editCategory(categorie)" size="small">
+          <ion-fab-button (click)="editCategory(category)" size="small">
             <ion-icon name="pencil"></ion-icon>
           </ion-fab-button>
         </ion-fab>
         <ion-fab style="position: relative;">
-          <ion-fab-button (click)="deleteCategorie(categorie.id)" size="small" color="danger">
+          <ion-fab-button (click)="deleteCategorie(category.id)" size="small" color="danger">
             <ion-icon name="trash"></ion-icon>
           </ion-fab-button>
         </ion-fab>

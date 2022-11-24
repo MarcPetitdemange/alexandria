@@ -1,92 +1,81 @@
 export default class Category {
-  private id: string;
-  private title: string;
-  private description: string;
-  private color: string;
+  private _id: string;
+  private _title: string;
+  private _description: string;
+  private _color?: string;
 
-  constructor(
-    $id: string,
-    $title: string,
-    $description: string,
-    $color: string
-  ) {
-    this.id = $id;
-    this.title = $title;
-    this.description = $description;
-    this.color = $color;
-  }
+	constructor(id: string, title: string, description: string, color: string) {
+		this._id = id;
+		this._title = title;
+		this._description = description;
+		this._color = color;
+	}
 
-  /**
-   * Getter $id
-   *
-   * @return
-   */
-  public get $id(): string {
-    return this.id;
-  }
 
-  /**
-   * Getter $title
-   *
-   * @return
-   */
-  public get $title(): string {
-    return this.title;
-  }
+    /**
+     * Getter id
+     * @return {string}
+     */
+	public get id(): string {
+		return this._id;
+	}
 
-  /**
-   * Getter $description
-   *
-   * @return
-   */
-  public get $description(): string {
-    return this.description;
-  }
+    /**
+     * Getter title
+     * @return {string}
+     */
+	public get title(): string {
+		return this._title;
+	}
 
-  /**
-   * Getter $color
-   *
-   * @return
-   */
-  public get $color(): string {
-    return this.color;
-  }
+    /**
+     * Getter description
+     * @return {string}
+     */
+	public get description(): string {
+		return this._description;
+	}
 
-  /**
-   * Setter $id
-   *
-   * @param value
-   */
-  public set $id(value: string) {
-    this.id = value;
-  }
+    /**
+     * Getter color
+     * @return {string}
+     */
+	public get color(): string {
+		return this._color;
+	}
 
-  /**
-   * Setter $title
-   *
-   * @param value
-   */
-  public set $title(value: string) {
-    this.title = value;
-  }
+    /**
+     * Setter id
+     * @param {string} value
+     */
+	public set id(value: string) {
+		this._id = value;
+	}
 
-  /**
-   * Setter $description
-   *
-   * @param value
-   */
-  public set $description(value: string) {
-    this.description = value;
-  }
+    /**
+     * Setter title
+     * @param {string} value
+     */
+	public set title(value: string) {
+		this._title = value;
+	}
 
-  /**
-   * Setter $color
-   *
-   * @param value
-   */
-  public set $color(value: string) {
-    this.color = value;
-  }
+    /**
+     * Setter description
+     * @param {string} value
+     */
+	public set description(value: string) {
+		this._description = value;
+	}
+
+    /**
+     * Setter color
+     * @param {string} value
+     */
+	public set color(value: string) {
+		this._color = value;
+	}
+
 
   public static sortCriteria(category1: Category, category2: Category): number {
     if (category1.title < category2.title) {

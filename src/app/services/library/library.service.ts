@@ -18,8 +18,23 @@ export class LibraryService {
     return this.bookCollectionRef.get();
   }
 
+  async getBooksByCategoryId(id: string) : Promise<Array<Book>> {
+    let books: Array<Book> = new Array();
+    let allBooks = await this.getAllLibrary().toPromise();
+    allBooks.forEach(book => {
+      if(book.categories){
+        book.categories.forEach(category => {
+          if(category.id === id){
+            books.push(book);
+          }
+        })
+      }
+    });
+    return Promise.resolve(books);
+  }
+
   editBook(book: Book){
-    return this.firestore.doc('/books/' + book.$id).update(book);
+    return this.firestore.doc('/books/' + book.id).update(book);
   }
 
   deleteBookById(id: string) {
@@ -28,6 +43,8 @@ export class LibraryService {
   }
 
   addBook(book: Book){
-    return this.bookCollectionRef.add(book);
+    const futureId = this.firestore.createId();
+    book.id = futureId;
+    return this.bookCollectionRef.doc(futureId).set(book);
   }
 }

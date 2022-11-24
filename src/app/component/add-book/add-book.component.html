@@ -28,7 +28,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Categories</ion-label>
-            <ion-select formControlName="categories" [compareWith]="compareWith" interface="action-sheet" [multiple]="true">
+            <ion-select formControlName="categories" [compareWith]="compareWith" interface="action-sheet" [multiple]="true" (ionChange)="handleUndefinedValue($event)">
               <ion-select-option *ngFor="let category of this.listCategories " [value]="category">{{category.title}}</ion-select-option>
             </ion-select>
           </ion-item>

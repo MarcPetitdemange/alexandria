@@ -1,12 +1,11 @@
-import { AlertController } from '@ionic/angular';
-import { CategoriesService } from 'src/app/services/categories/categories.service';
-import { AddBookComponent } from './../../../component/add-book/add-book.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { LibraryService } from '../../../services/library/library.service';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-import { MapUtils } from 'src/app/model/MapUtils';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 import Book from 'src/app/model/Book';
+import { MapUtils } from 'src/app/model/utils/MapUtils';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { LibraryService } from '../../../services/library/library.service';
+import { AddBookComponent } from './../../../component/add-book/add-book.component';
 
 @Component({
   selector: 'app-library',
@@ -29,6 +28,10 @@ export class LibraryPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+  }
+
+  ionViewDidEnter(){
+    debugger;
    this.refreshBookList();
   }
 
@@ -41,12 +44,13 @@ export class LibraryPage implements OnInit {
     this.libraryService.getAllLibrary().subscribe((value) => {
       this.currentFilterTitle = null;
       this.allBooks = MapUtils.mapBook(value);
+      debugger;
       this.allBooks.sort(Book.sortCriteria);
       this.allBooksResult = Book.filterByTitle(this.currentFilterTitle, this.allBooks);
     });
   }
 
-  editBook(book): void {
+  editBook(book: Book): void {
     this.modalBook.editMode = true;
     this.modalBook.toggleOpen();
 

@@ -1,115 +1,100 @@
 import Category from './Category';
 
 export default class Book {
-  private id: string;
-  private title: string;
-  private description: string;
-  private author: string;
-  private categories: Array<Category>;
+  private _id: string;
+  private _title: string;
+  private _description: string;
+  private _author: string;
+  private _categories: Array<Category>;
 
-  constructor(
-    $id: string,
-    $title: string,
-    $description: string,
-    $author: string,
-    $categories: Array<Category>
-  ) {
-    this.id = $id;
-    this.title = $title;
-    this.description = $description;
-    this.author = $author;
-    this.categories = $categories;
-  }
+	constructor(id: string, title: string, description: string, author: string, categories: Array<Category>) {
+		this._id = id;
+		this._title = title;
+		this._description = description;
+		this._author = author;
+		this._categories = categories;
+	}
+
 
   /**
-   * Getter $id
-   *
-   * @return
+   * Getter id
+   * @return {string}
    */
-  public get $id(): string {
-    return this.id;
-  }
+	public get id(): string {
+		return this._id;
+	}
 
   /**
-   * Setter $id
-   *
-   * @param value
+   * Getter title
+   * @return {string}
    */
-     public set $id(value: string) {
-      this.id = value;
-    }
+	public get title(): string {
+		return this._title;
+	}
 
   /**
-   * Getter $title
-   *
-   * @return
+   * Getter description
+   * @return {string}
    */
-  public get $title(): string {
-    return this.title;
-  }
+	public get description(): string {
+		return this._description;
+	}
 
-  /**
-   * Setter $title
-   *
-   * @param value
-   */
-     public set $title(value: string) {
-      this.title = value;
-    }
+    /**
+     * Getter author
+     * @return {string}
+     */
+	public get author(): string {
+		return this._author;
+	}
 
-  /**
-   * Getter $description
-   *
-   * @return
-   */
-  public get $description(): string {
-    return this.description;
-  }
+    /**
+     * Getter categories
+     * @return {Array<Category>}
+     */
+	public get categories(): Array<Category> {
+		return this._categories;
+	}
 
-  /**
-   * Getter $author
-   *
-   * @return
-   */
-  public get $author(): string {
-    return this.author;
-  }
+    /**
+     * Setter id
+     * @param {string} value
+     */
+	public set id(value: string) {
+		this._id = value;
+	}
 
-  /**
-   * Getter $categories
-   *
-   * @return
-   */
-  public get $categories(): Array<Category> {
-    return this.categories;
-  }
+    /**
+     * Setter title
+     * @param {string} value
+     */
+	public set title(value: string) {
+		this._title = value;
+	}
 
-  /**
-   * Setter $description
-   *
-   * @param value
-   */
-  public set $description(value: string) {
-    this.description = value;
-  }
+    /**
+     * Setter description
+     * @param {string} value
+     */
+	public set description(value: string) {
+		this._description = value;
+	}
 
-  /**
-   * Setter $author
-   *
-   * @param value
-   */
-  public set $author(value: string) {
-    this.author = value;
-  }
+    /**
+     * Setter author
+     * @param {string} value
+     */
+	public set author(value: string) {
+		this._author = value;
+	}
 
-  /**
-   * Setter $categories
-   *
-   * @param value
-   */
-  public set $categories(value: Array<Category>) {
-    this.categories = value;
-  }
+    /**
+     * Setter categories
+     * @param {Array<Category>} value
+     */
+	public set categories(value: Array<Category>) {
+		this._categories = value;
+	}
 
   public static sortCriteria(book1: Book, book2: Book): number {
     if (book1.title < book2.title) {
