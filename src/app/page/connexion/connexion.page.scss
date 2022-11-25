@@ -1,13 +1,31 @@
-ion-card{
-  width: 75vw;
+form{
+  width: 100%;
+  padding: 2rem;
 }
 
+ion-button{
+  font-weight: bold;
+}
+
+.createAccountLink{
+  font-weight: bold;
+  font-size: 13.5pt;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+ion-tem{
+  display: flex;
+  flex-direction: column;
+}
+
+.button{
+  margin-top: 1.5rem;
 }
 
 .error {
@@ -38,6 +56,14 @@ ion-card{
   font-size: 60pt;
 }
 
-.wrapper > ion-card{
-  width: 75vw;
+@media screen and (min-width: 769px) {
+  form{
+    width: 50vw;
+  }
+
+  .button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

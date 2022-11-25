@@ -12,9 +12,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ConnexionPage  {
 
-  public credentials: FormGroup;
+  credentials: FormGroup;
   error: any;
-  valid = false;
+  valid:boolean = false;
+  showLoader:boolean = false;
 
   constructor(public ngFireAuth: AngularFireAuth, private accountService: AccountService, private router: Router) {
     this.credentials = new FormGroup({
@@ -24,10 +25,17 @@ export class ConnexionPage  {
   }
 
   async submit(){
+    this.toogleLoader();
     const statut: any = await this.accountService.connect(this.credentials.value,this.error,this.valid);
+    this.toogleLoader();
     this.error = statut.error;
     this.valid = statut.valid;
   }
+
+  toogleLoader(): void {
+    this.showLoader = !this.showLoader;
+  }
+
 
 
 }

@@ -28,7 +28,11 @@ const routes: Routes = [
   {
     path: 'not-found',
     loadChildren: () => import('./page/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },  {
+    path: 'book-detail',
+    loadChildren: () => import('./page/details/book-detail/book-detail.module').then( m => m.BookDetailPageModule)
   }
+
 ];
 @NgModule({
   imports: [

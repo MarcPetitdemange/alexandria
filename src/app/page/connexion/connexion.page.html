@@ -1,21 +1,28 @@
 <ion-content>
   <div class="wrapper">
       <form [formGroup]="credentials" (ngSubmit)="submit()">
-        <ion-card>
+        <div>
+
+          <ion-img [src]=""></ion-img>
+          <h1>Alexandria</h1>
+
+
+          <ion-label>Email</ion-label>
           <ion-item>
-            <ion-label>Login / Email </ion-label>
             <ion-input type="email" clearInput formControlName="email" (keyup.enter)="submit()"></ion-input>
           </ion-item>
 
+          <ion-label>Password</ion-label>
           <ion-item>
-            <ion-label>Password</ion-label>
             <ion-input type="password" clearInput formControlName="password" (keyup.enter)="submit()"></ion-input>
           </ion-item>
-
-          <ion-button expand="block" type="submit">Connect</ion-button>
-          <a [routerLink]="'/create-account'">Create Account</a>
-        </ion-card>
+        </div>
+        <div class="button">
+          <ion-button expand="block" type="submit" shape="round" color="primary">Connect</ion-button>
+          <p>New to Alexandria ? <a class="createAccountLink" [routerLink]="'/create-account'">Create Account</a></p>
+        </div>
       </form>
+    <ion-progress-bar type="indeterminate" *ngIf="showLoader" ></ion-progress-bar>
 
     <div class="error" *ngIf="this.error !== null && this.error !== undefined">
       <ion-icon [size]="'large'" name="warning-outline"></ion-icon>

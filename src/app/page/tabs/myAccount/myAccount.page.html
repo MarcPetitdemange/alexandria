@@ -7,39 +7,43 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div>
+    <div>
+      <div class="align" *ngIf="this.accountService?.loggedUser?.photo !== null && this.accountService?.loggedUser?.photo !== undefined">
+        <ion-img class="rounded" [src]="this.accountService?.loggedUser?.photo"></ion-img>
+      </div>
 
-  <div class="align" *ngIf="this.accountService?.loggedUser?.photo !== null && this.accountService?.loggedUser?.photo !== undefined">
-    <ion-img class="rounded" [src]="this.accountService?.loggedUser?.photo"></ion-img>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <a [href]="'mailto:' + this.accountService?.loggedUser.email">{{this.accountService?.loggedUser.email}}</a>
+      </ion-item>
+      <ion-item>
+        <ion-label>Phone number</ion-label>
+        <a [href]="'tel:' + this.accountService?.loggedUser.phone">{{this.accountService?.loggedUser.phone}}</a>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lastname</ion-label>
+        {{this.accountService?.loggedUser.lastname}}
+      </ion-item>
+      <ion-item>
+        <ion-label>Firstname</ion-label>
+        {{this.accountService?.loggedUser.firstname}}
+      </ion-item>
+      <ion-item>
+        <ion-label>Account creation date</ion-label>
+        {{this.accountService?.loggedUser.creationDate}}
+      </ion-item>
+    </div>
+
+    <div>
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-button color="danger" (click)="disconnect()">
+            <ion-icon slot="start" name="exit"></ion-icon>
+            Disconnect
+          </ion-button>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
-
-  <ion-item>
-    <ion-label>Email</ion-label>
-    <a [href]="'mailto:' + this.accountService?.loggedUser.email">{{this.accountService?.loggedUser.email}}</a>
-  </ion-item>
-  <ion-item>
-    <ion-label>Phone number</ion-label>
-    <a [href]="'tel:' + this.accountService?.loggedUser.phone">{{this.accountService?.loggedUser.phone}}</a>
-  </ion-item>
-  <ion-item>
-    <ion-label>Lastname</ion-label>
-    {{this.accountService?.loggedUser.lastname}}
-  </ion-item>
-  <ion-item>
-    <ion-label>Firstname</ion-label>
-    {{this.accountService?.loggedUser.firstname}}
-  </ion-item>
-  <ion-item>
-    <ion-label>Account creation date</ion-label>
-    {{this.accountService?.loggedUser.creationDate}}
-  </ion-item>
-
-
-  <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <ion-button color="danger" (click)="disconnect()">
-        <ion-icon slot="start" name="exit"></ion-icon>
-        Disconnect
-      </ion-button>
-    </ion-row>
-  </ion-grid>
 </ion-content>
