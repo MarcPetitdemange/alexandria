@@ -1,7 +1,7 @@
 # ⬇ Require
 
 Web :
-* [Node JS 16.13.1 ou +](https://nodejs.org/en/download/)
+* [Node JS 16.13.1 or +](https://nodejs.org/en/download/)
 * Typescript : `npm i -g typescript`
 * Angular 13.1 : `npm install -g @angular/cli` 
 
@@ -12,7 +12,7 @@ Ionic :
 * Ionic 6.20.4 : `npm install -g @ionic/cli`
 * Emulator 
 
-# 🔨 Installation
+# 🔨 Set up
 
 1. Clone the project
 ```git

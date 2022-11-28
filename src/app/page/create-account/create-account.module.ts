@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CreateAccountPageRoutingModule } from './create-account-routing.module';
 
 import { CreateAccountPage } from './create-account.page';
+import { SharedComponentModule } from "../../component/shared-module/shared-component.module";
 
 @NgModule({
     declarations: [CreateAccountPage],
@@ -15,7 +16,8 @@ import { CreateAccountPage } from './create-account.page';
         FormsModule,
         IonicModule,
         CreateAccountPageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedComponentModule
     ]
 })
 export class CreateAccountPageModule {}

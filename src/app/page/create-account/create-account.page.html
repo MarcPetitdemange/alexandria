@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="credentialsForm" (ngSubmit)="submit">
+  <form [formGroup]="credentialsForm" (ngSubmit)="submit()">
     <ion-card>
       <ion-grid>
         <ion-row class="camera">
@@ -56,11 +56,16 @@
     </ion-card>
   </form>
 
+  <ion-progress-bar type="indeterminate" *ngIf="showLoader" ></ion-progress-bar>
+
 
 
   <div class="error" *ngIf="this.error !== null && this.error !== undefined">
     <ion-icon [size]="'large'" name="warning-outline"></ion-icon>
     <span>{{this.error}}</span>
+  </div>
+  <div class="valid" *ngIf="this.valid">
+    <ion-icon [size]="'200px'" name="checkmark-circle-outline"></ion-icon>
   </div>
 
 </ion-content>
