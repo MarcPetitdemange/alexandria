@@ -42,7 +42,6 @@ export class AccountService {
   }
 
   async createUserData(credential: User) {
-    debugger;
     const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
       `users/${credential.uid}`
     );

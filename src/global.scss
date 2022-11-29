@@ -47,3 +47,8 @@ form.alexandria-form {
 }
 
 
+:host img {
+  object-fit: cover;
+  height: 250px;
+  position: relative;
+}

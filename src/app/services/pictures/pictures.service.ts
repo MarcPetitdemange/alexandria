@@ -20,12 +20,12 @@ export class PicturesService {
   }
 
   public async uploadBookPicture(uid: string, webViewPath: string): Promise<void>{
+    debugger;
     const blob = await this.webViewPathToBlob(webViewPath);
-    this.storage.upload('/userPictures/' + uid, blob);
+    this.storage.upload('/bookPictures/' + uid, blob);
   }
 
   public getPictureUrl(path: string): Promise<string>{
-    debugger;
     if(path === null || path === undefined || path === ""){
       return null;
     }

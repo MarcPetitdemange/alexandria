@@ -1,4 +1,5 @@
 import Category from './Category';
+import { Photo } from './Photo';
 
 export default class Book {
   private _id: string;
@@ -6,13 +7,15 @@ export default class Book {
   private _description: string;
   private _author: string;
   private _categories: Array<Category>;
+  private _photo?: string | Blob | Photo;
 
-	constructor(id: string, title: string, description: string, author: string, categories: Array<Category>) {
+	constructor(id: string, title: string, description: string, author: string, categories: Array<Category>, photo: string | Blob | Photo) {
 		this._id = id;
 		this._title = title;
 		this._description = description;
 		this._author = author;
 		this._categories = categories;
+    this._photo = photo;
 	}
 
 
@@ -95,6 +98,23 @@ export default class Book {
 	public set categories(value: Array<Category>) {
 		this._categories = value;
 	}
+
+    /**
+     * Getter photo
+     * @return {string }
+     */
+	public get photo(): string | Blob | Photo  {
+		return this._photo;
+	}
+
+    /**
+     * Setter photo
+     * @param {string } value
+     */
+	public set photo(value: string | Blob | Photo ) {
+		this._photo = value;
+	}
+
 
   public static sortCriteria(book1: Book, book2: Book): number {
     if (book1.title < book2.title) {

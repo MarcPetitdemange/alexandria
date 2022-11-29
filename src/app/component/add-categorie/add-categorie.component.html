@@ -1,4 +1,4 @@
-<ion-modal #modalCategory trigger="open-modal-category" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false;">
+<ion-modal #modalCategory trigger="open-modal-category" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false; this.cleanForm();">
   <ng-template>
     <ion-header>
       <ion-toolbar>

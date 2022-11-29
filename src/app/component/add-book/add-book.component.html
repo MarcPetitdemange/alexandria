@@ -1,4 +1,4 @@
-<ion-modal #modal trigger="open-modal-book" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false;" (didPresent)="refreshListCategories()">
+<ion-modal #modal trigger="open-modal-book" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false; this.cleanForm();" (didPresent)="refreshListCategories()">
   <ng-template>
     <ion-header>
       <ion-toolbar>

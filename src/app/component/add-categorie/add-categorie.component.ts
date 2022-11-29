@@ -40,7 +40,6 @@ export class AddCategorieComponent implements OnInit {
 
   submit(){
     if(this.editMode) {
-      debugger;
       this.categoriesService.editCategorie(this.category.value).then(value => {
         this.categoriesService.updateCategoryInBooks(this.category.value);
         this.modalCategory.dismiss();
@@ -48,7 +47,6 @@ export class AddCategorieComponent implements OnInit {
         this.refresh.emit();
       });
     } else {
-      debugger;
       this.categoriesService.addCategory(this.category.value).then(value => {
         this.modalCategory.dismiss();
         this.cleanForm();

@@ -1,3 +1,4 @@
+import { PicturesService } from './../../services/pictures/pictures.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -5,6 +6,8 @@ import { ActionSheetController, IonModal } from '@ionic/angular';
 import { MapUtils } from 'src/app/model/utils/MapUtils';
 import { CategoriesService } from './../../services/categories/categories.service';
 import { LibraryService } from './../../services/library/library.service';
+import Book from 'src/app/model/Book';
+import { Photo } from 'src/app/model/Photo';
 
 @Component({
   selector: 'app-add-book',
@@ -28,6 +31,7 @@ export class AddBookComponent implements OnInit {
 
   constructor(private libraryService: LibraryService,
      private categoriesService: CategoriesService,
+     private pictureService:PicturesService,
      private actionSheetCtrl: ActionSheetController) {
       this.book = new FormGroup({
         id: new FormControl(null),
@@ -58,15 +62,22 @@ export class AddBookComponent implements OnInit {
    * Submit the modifications in the form
    */
   submit(){
+    const bookValue: Book = this.book.value;
     if(this.editMode) { // If we are in edition mode
-      this.libraryService.editBook(this.book.value).then(value => {
+      this.libraryService.editBook(bookValue).then(value => {
         this.modalBook.dismiss();
         this.cleanForm();
         this.refresh.emit();
       });
     } else { // If we are in creation (add) mode
       debugger;
-      this.libraryService.addBook(this.book.value).then(value => {
+      this.libraryService.addBook(bookValue).then(value => {
+        bookValue.photo = bookValue.photo as Photo;
+        if(bookValue != null && bookValue.photo != null && bookValue.id != null && bookValue.photo.webviewPath != null){
+          this.pictureService.uploadBookPicture(this.book.value.id,this.book.value.photo.webviewPath);
+          this.book.value.photo = '/bookPictures/' + this.book.value.id;
+        }
+        this.libraryService.editBook(bookValue);
         this.modalBook.dismiss();
         this.cleanForm();
         this.refresh.emit();

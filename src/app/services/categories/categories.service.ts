@@ -23,7 +23,6 @@ export class CategoriesService {
       if(book.categories != null && book.categories.length != 0){
         book.categories = book.categories.filter(bookCategory => (bookCategory.id !== category.id));
         book.categories.push(category);
-        debugger;
         this.libraryService.editBook(book);
       }
     });

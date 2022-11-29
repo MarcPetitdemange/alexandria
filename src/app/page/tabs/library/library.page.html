@@ -14,6 +14,7 @@
 
   <div class="booksGrid">
     <ion-card *ngFor="let book of this.allBooksResult">
+      <ion-img [src]="book.photo" *ngIf="book.photo"></ion-img>
       <ion-card-header >
         <ion-card-title>{{book.title}}</ion-card-title>
         <ion-card-subtitle><ion-icon name="brush-outline"></ion-icon>Author: {{book.author}}</ion-card-subtitle>

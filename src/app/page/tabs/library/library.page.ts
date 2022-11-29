@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { AlertController } from '@ionic/angular';
 import Book from 'src/app/model/Book';
 import { MapUtils } from 'src/app/model/utils/MapUtils';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { PicturesService } from 'src/app/services/pictures/pictures.service';
 import { LibraryService } from '../../../services/library/library.service';
 import { AddBookComponent } from './../../../component/add-book/add-book.component';
 
@@ -23,6 +24,7 @@ export class LibraryPage implements OnInit {
 
   constructor(
     private libraryService: LibraryService,
+    private pictureService: PicturesService,
     private categoriesService: CategoriesService,
     private alertController: AlertController
   ) {}
@@ -31,7 +33,6 @@ export class LibraryPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    debugger;
    this.refreshBookList();
   }
 
@@ -44,8 +45,13 @@ export class LibraryPage implements OnInit {
     this.libraryService.getAllLibrary().subscribe((value) => {
       this.currentFilterTitle = null;
       this.allBooks = MapUtils.mapBook(value);
-      debugger;
       this.allBooks.sort(Book.sortCriteria);
+      this.allBooks.forEach(async book => {
+        if(book.photo != null){
+          book.photo = await this.pictureService.getPictureUrl(book.photo);
+          debugger;
+        }
+      })
       this.allBooksResult = Book.filterByTitle(this.currentFilterTitle, this.allBooks);
     });
   }

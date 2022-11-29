@@ -42,7 +42,7 @@ export class LibraryService {
     bookRef.delete();
   }
 
-  addBook(book: Book){
+  addBook(book: Book): Promise<Book>{
     const futureId = this.firestore.createId();
     book.id = futureId;
     return this.bookCollectionRef.doc(futureId).set(book);
