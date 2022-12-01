@@ -28,7 +28,8 @@ export class CreateAccountPage implements OnInit {
       email: new FormControl(''),
       phone: new FormControl(''),
       password: new FormControl(''),
-      confirmPassword: new FormControl('')
+      confirmPassword: new FormControl(''),
+      photo: new FormControl(null)
     });
   }
 
