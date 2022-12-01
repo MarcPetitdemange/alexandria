@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>bookDetail</ion-title>
+  <ion-toolbar class="ion-text-center">
+    <ion-title>{{book.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-img [src]="book.photo" style="width: 300px;"></ion-img>
+  <p>
+    Description: {{book.description}}
+  </p>
+  <p>
+    Author: {{book.author}}
+  </p>
+  Categories:
+  <div>
+    <ion-chip *ngFor="let categorie of book.categories " [style.border-color]="categorie.color" [style.border-style]="'solid'" [style.border-width]="'2px'">{{categorie.title}}</ion-chip>
+  </div>
 </ion-content>

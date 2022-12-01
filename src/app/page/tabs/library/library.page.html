@@ -13,7 +13,7 @@
 
 
   <div class="booksGrid">
-    <ion-card *ngFor="let book of this.allBooksResult">
+    <ion-card *ngFor="let book of this.allBooksResult" (click)="details(book)">
       <ion-img [src]="book.photo" *ngIf="book.photo"></ion-img>
       <ion-card-header >
         <ion-card-title>{{book.title}}</ion-card-title>

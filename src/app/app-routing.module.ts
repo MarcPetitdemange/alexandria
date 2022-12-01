@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
 	},
   {
+		path: 'details',
+		loadChildren: () => import('./page/details/book-detail/book-detail.module').then((m) => m.BookDetailPageModule),
+    canActivate: [AuthGuard]
+	},
+  {
 		path: '',
 		redirectTo: '/login',
 		pathMatch: 'full'
@@ -28,7 +33,8 @@ const routes: Routes = [
   {
     path: 'not-found',
     loadChildren: () => import('./page/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },  {
+  },
+  {
     path: 'book-detail',
     loadChildren: () => import('./page/details/book-detail/book-detail.module').then( m => m.BookDetailPageModule)
   }

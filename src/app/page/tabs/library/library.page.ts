@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { AlertController } from '@ionic/angular';
 import Book from 'src/app/model/Book';
@@ -26,7 +27,8 @@ export class LibraryPage implements OnInit {
     private libraryService: LibraryService,
     private pictureService: PicturesService,
     private categoriesService: CategoriesService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -102,5 +104,10 @@ export class LibraryPage implements OnInit {
     if (result.hasContent) {
       console.log(result.content); // log the raw scanned content
     }
+  }
+
+  details(book: Book){
+    debugger;
+    this.router.navigate(['/details', {book: JSON.stringify(book)}]);
   }
 }
