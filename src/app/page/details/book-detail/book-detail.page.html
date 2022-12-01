@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar class="ion-text-center">
+    <ion-back-button slot="start"></ion-back-button>
     <ion-title>{{book.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-img [src]="book.photo" style="width: 300px;"></ion-img>
+  <ion-img [src]="book.photoView" *ngIf="book.photoView" style="width: 300px;"></ion-img>
   <p>
     Description: {{book.description}}
   </p>

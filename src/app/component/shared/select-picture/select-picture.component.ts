@@ -12,6 +12,8 @@ export class SelectPictureComponent implements OnInit {
 
   @Input() public parentForm: FormGroup;
   @Input() public formControlName = 'photo';
+
+
   public photo: any = {};
 
   constructor(private actionSheetCtrl: ActionSheetController) {

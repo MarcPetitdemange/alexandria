@@ -49,30 +49,33 @@ export class LibraryPage implements OnInit {
       this.allBooks = MapUtils.mapBook(value);
       this.allBooks.sort(Book.sortCriteria);
       this.allBooks.forEach(async book => {
-        if(book.photo != null){
-          book.photo = await this.pictureService.getPictureUrl(book.photo);
-          debugger;
-        }
+          book.photoView = await this.pictureService.getPictureUrl(book.photo);
       })
       this.allBooksResult = Book.filterByTitle(this.currentFilterTitle, this.allBooks);
     });
   }
 
-  editBook(book: Book): void {
+  editBook($event, book: Book): void {
+    $event.stopPropagation();
+
     this.modalBook.editMode = true;
     this.modalBook.toggleOpen();
-
+    debugger;
     this.modalBook.book.patchValue({
       id: book.id,
       title: book.title,
       description: book.description,
       author: book.author,
-      categories: book.categories
+      categories: book.categories,
+      photo: book.photo
     });
+
+
   }
 
 
-  async deleteBook(uid: string) {
+  async deleteBook($event, book: Book) {
+    $event.stopPropagation();
     const alert = await this.alertController.create({
       header: 'Warning !',
       message: 'You\'re going to delete this book.<br> Do you want to continue ?',
@@ -84,8 +87,11 @@ export class LibraryPage implements OnInit {
         {
           text: 'OK',
           role: 'confirm',
-          handler: () => {
-            this.libraryService.deleteBookById(uid);
+          handler: async () => {
+            if(book.photo != null){
+              await this.pictureService.deletePictureFromRef(book.photo as string);
+            }
+            await this.libraryService.deleteBookById(book.id);
             this.refreshBookList();
           },
         },
@@ -108,6 +114,6 @@ export class LibraryPage implements OnInit {
 
   details(book: Book){
     debugger;
-    this.router.navigate(['/details', {book: JSON.stringify(book)}]);
+    this.router.navigate(['tabs/library/detail'], {state: book});
   }
 }

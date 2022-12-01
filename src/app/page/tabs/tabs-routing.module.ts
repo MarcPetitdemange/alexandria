@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('./myAccount/myAccount.module').then(m => m.MyAccountPageModule)
       },
       {
+        path: 'library/detail',
+        loadChildren: () => import('../../page/details/book-detail/book-detail.module').then((m) => m.BookDetailPageModule),
+      },
+      {
         path: '',
         redirectTo: '/tabs/library',
         pathMatch: 'full'

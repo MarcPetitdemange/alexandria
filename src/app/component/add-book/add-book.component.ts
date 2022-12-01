@@ -28,6 +28,7 @@ export class AddBookComponent implements OnInit {
   isOpen = false;
 
   editMode = false;
+  bookBeforeEdition: Book;
 
   constructor(private libraryService: LibraryService,
      private categoriesService: CategoriesService,
@@ -38,11 +39,13 @@ export class AddBookComponent implements OnInit {
         title: new FormControl(''),
         description: new FormControl(''),
         author: new FormControl(null),
-        categories: new FormControl(null)
+        categories: new FormControl(null),
+        photo: new FormControl(null)
       });
   }
 
   ngOnInit() {
+
     this.refreshListCategories();
   }
 
@@ -61,27 +64,33 @@ export class AddBookComponent implements OnInit {
   /**
    * Submit the modifications in the form
    */
-  submit(){
+  async submit(){
     const bookValue: Book = this.book.value;
+    bookValue.photo = bookValue.photo as Photo;
     if(this.editMode) { // If we are in edition mode
-      this.libraryService.editBook(bookValue).then(value => {
-        this.modalBook.dismiss();
-        this.cleanForm();
-        this.refresh.emit();
-      });
+      if(bookValue != null && bookValue.photo != null && bookValue.id != null && bookValue.photo.webviewPath != null){
+        if(this.bookBeforeEdition.photo != null){
+          await this.pictureService.deletePictureFromRef(this.bookBeforeEdition.photo as string);
+        }
+        await this.pictureService.uploadBookPicture(bookValue.id,bookValue.photo.webviewPath);
+        this.book.value.photo = '/bookPictures/' + this.book.value.id;
+      }
+      debugger;
+      await this.libraryService.editBook(bookValue);
+      this.modalBook.dismiss();
+      this.cleanForm();
+      this.refresh.emit();
     } else { // If we are in creation (add) mode
       debugger;
-      this.libraryService.addBook(bookValue).then(value => {
-        bookValue.photo = bookValue.photo as Photo;
-        if(bookValue != null && bookValue.photo != null && bookValue.id != null && bookValue.photo.webviewPath != null){
-          this.pictureService.uploadBookPicture(this.book.value.id,this.book.value.photo.webviewPath);
-          this.book.value.photo = '/bookPictures/' + this.book.value.id;
-        }
-        this.libraryService.editBook(bookValue);
-        this.modalBook.dismiss();
-        this.cleanForm();
-        this.refresh.emit();
-      });
+      await this.libraryService.addBook(bookValue);
+      if(bookValue != null && bookValue.photo != null && bookValue.id != null && bookValue.photo.webviewPath != null){
+        await this.pictureService.uploadBookPicture(bookValue.id,bookValue.photo.webviewPath);
+        this.book.value.photo = '/bookPictures/' + bookValue.id;
+      }
+      await this.libraryService.editBook(bookValue);
+      this.modalBook.dismiss();
+      this.cleanForm();
+      this.refresh.emit();
     }
   }
 
@@ -98,6 +107,15 @@ export class AddBookComponent implements OnInit {
    */
   public toggleOpen(){
     this.isOpen = !this.isOpen;
+  }
+
+  onPresent(){
+    if(this.editMode){
+      debugger;
+      this.bookBeforeEdition = this.book.value;
+      this.bookBeforeEdition.photo as string;
+    }
+    this.refreshListCategories();
   }
 
   refreshListCategories(){

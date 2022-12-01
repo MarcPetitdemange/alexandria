@@ -20,16 +20,25 @@ export class PicturesService {
   }
 
   public async uploadBookPicture(uid: string, webViewPath: string): Promise<void>{
-    debugger;
     const blob = await this.webViewPathToBlob(webViewPath);
-    this.storage.upload('/bookPictures/' + uid, blob);
+    await this.storage.upload('/bookPictures/' + uid, blob);
   }
 
-  public getPictureUrl(path: string): Promise<string>{
+  public async getPictureUrl(path: string): Promise<string>{
     if(path === null || path === undefined || path === ""){
       return null;
     }
-    return this.storage.ref(path).getDownloadURL().toPromise();
+    return await this.storage.ref(path).getDownloadURL().toPromise();
+  }
+
+  public async deletePictureFromRef(reference: string) : Promise<void>{
+    debugger;
+    this.storage.ref(reference).delete().toPromise();
+  }
+
+  public async deletePictureFromUrl(reference: string) : Promise<void>{
+    debugger;
+    this.storage.refFromURL(reference).delete().toPromise();
   }
 
 }

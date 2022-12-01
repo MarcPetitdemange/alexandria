@@ -11,33 +11,36 @@
 
 <ion-content [fullscreen]="true">
 
-
-  <div class="booksGrid">
+<!--   <div class="booksGrid">
+    <ion-spinner name="circular"></ion-spinner>
+  </div> -->
+  <div class="booksGrid" *ngIf="this.allBooksResult.length > 0">
     <ion-card *ngFor="let book of this.allBooksResult" (click)="details(book)">
-      <ion-img [src]="book.photo" *ngIf="book.photo"></ion-img>
+      <ion-img [src]="book.photoView" *ngIf="book.photoView"></ion-img>
       <ion-card-header >
         <ion-card-title>{{book.title}}</ion-card-title>
         <ion-card-subtitle><ion-icon name="brush-outline"></ion-icon>Author: {{book.author}}</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
-        <p>{{book.description}}</p>
-        <ion-chip *ngFor="let categorie of book.categories " [style.border-color]="categorie.color" [style.border-style]="'solid'" [style.border-width]="'2px'">{{categorie.title}}</ion-chip>
         <div class="align-right">
           <ion-fab style="position: relative;">
-            <ion-fab-button (click)="editBook(book)" size="small">
+            <ion-fab-button (click)="editBook($event, book)" size="small">
               <ion-icon name="pencil"></ion-icon>
             </ion-fab-button>
           </ion-fab>
           <ion-fab style="position: relative;">
-            <ion-fab-button (click)="deleteBook(book.id)" size="small" color="danger">
+            <ion-fab-button (click)="deleteBook($event, book)" size="small" color="danger">
               <ion-icon name="trash"></ion-icon>
             </ion-fab-button>
           </ion-fab>
         </div>
       </ion-card-content>
     </ion-card>
+  </div>
 
+  <div *ngIf="this.allBooksResult.length <= 0">
+    No book found
   </div>
 
 

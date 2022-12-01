@@ -1,5 +1,5 @@
 <div class="pictureSelector" [formGroup]="parentForm">
-  <div class="align" *ngIf="parentForm.get(formControlName).value === null || parentForm.get(formControlName).value === undefined">
+  <div class="align" *ngIf="(parentForm.get(formControlName).value === null || parentForm.get(formControlName).value === undefined)">
     <ion-button class="rounded" (click)="pictureChoice()">
       <ion-icon name="camera-outline"></ion-icon>
     </ion-button>

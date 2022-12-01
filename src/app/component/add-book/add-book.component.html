@@ -1,4 +1,4 @@
-<ion-modal #modal trigger="open-modal-book" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false; this.cleanForm();" (didPresent)="refreshListCategories()">
+<ion-modal #modal trigger="open-modal-book" [isOpen]="isOpen" (didDismiss)="isOpen = false; editMode = false; this.cleanForm();" (didPresent)="onPresent()">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -32,8 +32,8 @@
               <ion-select-option *ngFor="let category of this.listCategories " [value]="category">{{category.title}}</ion-select-option>
             </ion-select>
           </ion-item>
-          <app-select-picture [parentForm]="book"></app-select-picture>
         </div>
+        <app-select-picture [parentForm]="book" [style]="'margin-top: 2rem;'"></app-select-picture>
         <div class="bottom-menu">
           <ion-button shape="round" color="secondary" (click)="cancel()">
             <ion-icon slot="start" name="close-circle"></ion-icon>Cancel
